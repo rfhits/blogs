@@ -1,6 +1,6 @@
 [toc]
 
-## 个人信息配置
+# 个人信息配置
 
 Git的config会作为 `git commit`时的相关信息，但不会作为验证信息，这一点是很多新手的误区。能不能推送上去，只和ssh、https验证是否通过有关，和username及email无关。
 
@@ -49,10 +49,12 @@ git config user.name
 git config user.email 
 
 # 某个项目根目录下使用，显示的是 全局配置+当前项目的配置
-git config --list 
+git config --list
 ```
 
-## proxy
+参考[Git全局配置和单个仓库的用户名邮箱配置](https://blog.csdn.net/qq_29232943/article/details/103121667)
+
+# proxy
 
 查看配置
 
@@ -64,11 +66,11 @@ git config --global --get https.proxy
 修改配置
 
 ```bash
-# 如果本地的代理服务器用http/https协议，只需要设置上面两条
-git config --global http.proxy http://127.0.0.1:7890
+# 如果本地的代理服务器用http/https协议，只需要设置这两条
+git config --global http.proxy https://127.0.0.1:7890
 git config --global https.proxy https://127.0.0.1:7890
 
-# 如果本地代理服务器使用 socks协议，设置下面两条
+# 如果本地代理服务器使用socks5协议，设置下面两条
 git config --global http.proxy socks5://127.0.0.1:7880
 git config --global https.proxy socks5://127.0.0.1:7880
 ```
@@ -80,7 +82,9 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-## gitignore
+参考：[config a proxy to work with git](https://www.delftstack.com/howto/git/git-setup-proxy/)
+
+# gitignore
 
 常常会把不想添加的文件被checked，所以有如下命令，清空git的check
 
@@ -90,9 +94,9 @@ git add .
 git commit -m 'update .gitignore'
 ```
 
-## commit
+# commit
 
-### commit message
+## commit message
 
 [Git如何规范填写Commit Message_CSDN](https://blog.csdn.net/asc_123456/article/details/118070026)
 
@@ -118,7 +122,7 @@ type 填对最重要，如 fix, feat, test, refactor, perf, style, docs
 | docs     | Development | 文档类更新                                                                         |
 | chore    | Development | 其他类型，比如构建流程、依赖管理或者辅助工具的变动                                 |
 
-### empty commit
+## empty commit
 
 记录一下empty commit的命令
 
@@ -126,7 +130,7 @@ type 填对最重要，如 fix, feat, test, refactor, perf, style, docs
 git commit --allow-empty -m "commit message"
 ```
 
-### 合并多个 commit
+## 合并多个 commit
 
 参考[git 合并多个 commit-睿站](https://www.bilibili.com/video/BV15h411f74h)
 
@@ -137,9 +141,9 @@ git rebase -i <要合并的commit前一个的hash>
 # 重新填写 commit 信息
 ```
 
-## 协同开发
+# 协同开发
 
-### 本地创建切换分支
+## 本地创建切换分支
 
 ```bash
 git checkout -b dev
@@ -147,18 +151,18 @@ git checkout -b dev
 
 现在位于dev分支下
 
-### 推送到远程分支
+## 推送到远程分支
 
 ```bash
 git push -u origin dev
 ```
 
-### 本地合并dev分支
+## 本地合并dev分支
 
 先到把dev合并的分支，比如main
 
 ```bash
-git  checkout main
+git checkout main
 ```
 
 然后merge
@@ -167,7 +171,7 @@ git  checkout main
 git merge dev
 ```
 
-### 删除本地和远程的dev分支
+## 删除本地和远程的dev分支
 
 先删除本地分支
 
@@ -181,8 +185,4 @@ git branch -d dev
 git push origin --delete dev
 ```
 
-## 参考资料
-
-[1] [Git全局配置和单个仓库的用户名邮箱配置](https://blog.csdn.net/qq_29232943/article/details/103121667)
-
-[2] [Git合并分支](https://www.jianshu.com/p/26d050497abb)
+参考[Git合并分支](https://www.jianshu.com/p/26d050497abb)
