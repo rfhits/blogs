@@ -71,8 +71,8 @@ git config --global http.proxy https://127.0.0.1:7890
 git config --global https.proxy https://127.0.0.1:7890
 
 # 如果本地代理服务器使用socks5协议，设置下面两条
-git config --global http.proxy socks5://127.0.0.1:7880
-git config --global https.proxy socks5://127.0.0.1:7880
+git config --global http.proxy socks5://127.0.0.1:7890
+git config --global https.proxy socks5://127.0.0.1:7890
 ```
 
 取消配置
