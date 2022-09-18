@@ -186,3 +186,7 @@ git push origin --delete dev
 ```
 
 参考[Git合并分支](https://www.jianshu.com/p/26d050497abb)
+
+# github加速
+
+参考[fastgit使用指南](https://doc.fastgit.org/zh-cn/guide.html)
