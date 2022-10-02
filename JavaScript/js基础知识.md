@@ -1,10 +1,16 @@
+js基础知识
+
+在我写这篇文章时，我还是个js小白
+
+所以记录**我认为**有用的基础知识
+
 + 数组
   + 尾部插入： push
   + 已知value获取index
   + [删除元素](https://www.cnblogs.com/shangrao/p/12832572.html)
     + 索引删除：splice(index,len,[item]) ：index:数组开始下标；len: 替换/删除的长度；item:替换的值，删除操作的话 item为空
   + 数组合并：`arr1.push.apply(arr1,arr2)`
-    
+
 + 字符串
   + 字串：`substr(start, length)`: 指定start获取length个字符
   + trim(): 返回删除两边空白的新的字串，
@@ -23,7 +29,7 @@
 
 + Promise
   + [Promise.all 用法](https://blog.csdn.net/Yetian_2000/article/details/112019727)
-findIndex 方法：
+  findIndex 方法：
 
 findIndex() 方法返回传入一个测试条件（函数）符合条件的数组第一个元素位置。
 
