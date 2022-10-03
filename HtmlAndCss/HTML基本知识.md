@@ -1,5 +1,7 @@
 [toc]
+
 ---
+
 + flex
   + 内部元素间距：justify-content
   + [一排的最后一个div占据剩下所有空间：flex-grow:1](https://www.cnblogs.com/yingshiyv/p/14008913.html)
@@ -17,7 +19,7 @@
     + [边框阴影](https://www.cnblogs.com/xuedong09/p/3158644.html)
 + canvas
   + [画图](https://www.jianshu.com/p/254a5fa6c03b)
-+ [position]
++ position
   + [知乎教学视频](https://www.zhihu.com/question/19926700/answer/2083545234)
   + absolute: 相对于整个页面定位，需要配合left和top使用，表示和页面的间距
   + relative: 相对于自己原来的位置定位，原来的位置还是会占据空间的
@@ -35,7 +37,9 @@
 
 # text
 
-单行文本溢出
+## 单行文本溢出隐藏
+
+一行文字太长，用省略号隐藏
 
 ```css
  .content {
@@ -48,7 +52,6 @@
     /* 匀速溢出内容，隐藏 */
     overflow: hidden;   
   }
-
 ```
 
 # 组件/常用操作
