@@ -83,3 +83,7 @@ style="margin-left: 10rpx;overflow: hidden;white-space: nowrap;overflow-x:auto;"
 }}</van-tag>
 </view>
 ```
+
+# 表格
+
+斑马纹可以使用nth-child伪类实现
