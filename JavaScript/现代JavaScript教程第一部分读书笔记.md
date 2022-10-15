@@ -86,7 +86,7 @@ https://zh.javascript.info/property-descriptors
 - 删除对象的属性 `del`
 - 关键字 `in`判断某个属性是否在对象内
 - 使用 `for let <key> in <obj>`获取对象的属性
-    什么时候key能被for获取，见[属性标志](https://zh.javascript.info/property-descriptors)
+  什么时候key能被for获取，见[属性标志](https://zh.javascript.info/property-descriptors)
 
 访问对象属性的方法有两种，分别是用 `.`和 `[]`。
 
@@ -196,11 +196,10 @@ alert( str.toUpperCase() ); // HELLO
 
 https://zh.javascript.info/number#zong-jie
 
-精度损失，导致`0.1+0.2 != 0.3`，也导致`6.35.toFixed(1) == 6.3`
+精度损失，导致 `0.1+0.2 != 0.3`，也导致 `6.35.toFixed(1) == 6.3`
 
-- `isNaN`和`isFinite`
-
-- `parseInt`和`parserFloat`
+- `isNaN`和 `isFinite`
+- `parseInt`和 `parserFloat`
 - 数不尽的trick...
 
 ## 数组
@@ -290,7 +289,7 @@ https://zh.javascript.info/closure
 > 1. **环境记录（Environment Record）** —— 一个存储所有局部变量作为其属性（包括一些其他信息，例如 `this` 的值）的对象。
 > 2. 对 **外部词法环境** 的引用，与外部代码相关联。
 
-很像写编译器的“栈”，比如第几层`{}`
+很像写编译器的“栈”，比如第几层 `{}`
 
 变量和函数也是“环境记录”的属性，这很JavaScript
 
@@ -311,8 +310,6 @@ function hello() {
 如果return的函数失去了引用，就被销毁。
 
 和c语言中static的区别是，函数闭包可以同时存在多个不同，而static只是内存中一个地方。
-
-
 
 ## 命名函数表达式
 
@@ -337,8 +334,6 @@ welcome(); // Hello, Guest（嵌套调用有效）
 
 ## setTimeout
 
-
-
 可以嵌套调用，保证每次函数调用间隔
 
 下面这个例子，我们创建了一个闭包函数，再用一个叫做go的函数将其包起来，每次go结束后，调用go。
@@ -360,7 +355,7 @@ let call = setTimeout(function go() {
 }, 1000);
 ```
 
-嵌套`setTimeout`和`setInterval`的区别在于，
+嵌套 `setTimeout`和 `setInterval`的区别在于，
 
 前者是callback，先call，然后函数执行结束后，再延时，再执行
 
@@ -412,8 +407,6 @@ function cachingDecorator(func) {
   };
 }
 ```
-
-
 
 ## func.call(context, args)
 
@@ -542,7 +535,7 @@ https://zh.javascript.info/prototype-inheritance
 
 手动为对象指定一个另一个对象作为proto，当该对象找不到对应的方法或者属性时，到被指定的对象去查找。
 
-注意上下文是`.`前的对象
+注意上下文是 `.`前的对象
 
 但是delete只会在当前对象里寻找，不会到proto中寻找
 
@@ -577,7 +570,7 @@ alert( lazy.stomach ); // apple
 
 https://zh.javascript.info/function-prototype
 
-上面讲了如何手动指定一个对象的[[prototype]]，但是如果要通过`new <Func>()`来批量生成一堆对象，就可以通过改写函数的`prototype`属性。
+上面讲了如何手动指定一个对象的[[prototype]]，但是如果要通过 `new <Func>()`来批量生成一堆对象，就可以通过改写函数的 `prototype`属性。
 
 ```js
 function Animal() {
@@ -607,9 +600,9 @@ console.log(dog.name) // animal got change
 
 https://zh.javascript.info/native-prototypes
 
-还记得吗，对于原始类型，我们可以`<primative_type>.<function>`，这是因为引擎创造了一个临时对象，这个对象有这些方法，这些对象也有自己的prototype，就是Number等。
+还记得吗，对于原始类型，我们可以 `<primative_type>.<function>`，这是因为引擎创造了一个临时对象，这个对象有这些方法，这些对象也有自己的prototype，就是Number等。
 
-对于Array，因为它本身就是对象，所以就没有“临时对象包装器”这个说法，本身就靠`[[prototype]]`引用到Array上。
+对于Array，因为它本身就是对象，所以就没有“临时对象包装器”这个说法，本身就靠 `[[prototype]]`引用到Array上。
 
 方法借用可以向这些Number、Array借用方法。
 
@@ -617,7 +610,7 @@ https://zh.javascript.info/native-prototypes
 
 https://zh.javascript.info/prototype-methods
 
-最好不要直接使用`__proto__`，因为`__proto__`对于对象而言，只是一个普通的字符串，而且是一个非常重要的字符串，JavaScript没有提供private这种东西，这个重要的东西可能被“意想不到的”方式更改。
+最好不要直接使用 `__proto__`，因为 `__proto__`对于对象而言，只是一个普通的字符串，而且是一个非常重要的字符串，JavaScript没有提供private这种东西，这个重要的东西可能被“意想不到的”方式更改。
 
 考虑一个需求：
 
@@ -625,11 +618,11 @@ https://zh.javascript.info/prototype-methods
 2. 用户创建一个对象
 3. 使用用户提供的这俩玩意，放到一个obj中
 
-如果用户输入`__proto__`，那么就惨了，toString可能不work。
+如果用户输入 `__proto__`，那么就惨了，toString可能不work。
 
 > 正如我们所知道的，`__proto__` 不是对象的属性，而是 `Object.prototype` 的访问器属性
 
-所以，我们使用`Object.<prto_method>`
+所以，我们使用 `Object.<prto_method>`
 
 # 类
 
@@ -648,8 +641,6 @@ https://zh.javascript.info/class-inheritance#zhong-xie-constructor
 constructor会创建对象，并指定this
 
 子类的constructor要求调用父类的constructor，使用父类constructor产生的this
-
-
 
 ```js
 class Animal {
@@ -672,7 +663,7 @@ new Rabbit(); // animal
 
 ## [[HomeObject]]
 
-继承方法不是通过`this.__proto__.<method>.call(this)`实现的
+继承方法不是通过 `this.__proto__.<method>.call(this)`实现的
 
 因为这样当追溯到父类时，this依旧是子类，没法继续向上追溯
 
@@ -689,7 +680,7 @@ craw # "this" is still lizard
 lizard
 ```
 
-在往上找proto的时候，不能改变this，而是通过类方法的`[[HomeObject]]`获取`prototype`，**可能**是
+在往上找proto的时候，不能改变this，而是通过类方法的 `[[HomeObject]]`获取 `prototype`，**可能**是
 
 `[[HomeObject]].__proto__`，因为教程没有细讲，我猜的
 
@@ -733,7 +724,7 @@ https://zh.javascript.info/promise-basics
 
 promise是一个状态机，接收一段能够修改自己状态的代码，
 
-当自己状态改变后，对应地执行通过`then`和`catch`”注册“到自己身上的函数
+当自己状态改变后，对应地执行通过 `then`和 `catch`”注册“到自己身上的函数
 
 promise在自己被创建时立刻执行
 
@@ -750,7 +741,7 @@ promise.then(console.log); // done!（现在显示）
 
 ## finally
 
-当状态变成`fulfilled`时执行`then`上注册的函数。
+当状态变成 `fulfilled`时执行 `then`上注册的函数。
 
 ## then
 
@@ -773,37 +764,34 @@ promiseA+规范中文翻译：https://www.ituring.com.cn/article/66566
 > Promise解决过程:
 > Promise 解决过程是一个抽象的操作，其需输入一个 promise 和一个值，我们表示为
 >
->  `[[Resolve]](promise, x)`，
+> `[[Resolve]](promise, x)`，
 >
 > 如果 x 有 then 方法且看上去像一个 Promise ，解决程序即尝试使 promise 接受 x 的状态；否则其用 x 的值来执行 promise 。
 >
 > 这种 thenable 的特性使得 Promise 的实现更具有通用性：只要其暴露出一个遵循 Promise/A+ 协议的 then 方法即可；这同时也使遵循 Promise/A+ 规范的实现可以与那些不太规范但可用的实现能良好共存。
 >
-> 运行` [[Resolve]](promise, x) `需遵循以下步骤：
+> 运行 `[[Resolve]](promise, x)`需遵循以下步骤：
 >
 > - x 与 promise 相等
->     如果 promise 和 x 指向同一对象，以 TypeError 为据因拒绝执行 promise
->
+>   如果 promise 和 x 指向同一对象，以 TypeError 为据因拒绝执行 promise
 > - x 为 Promise
->     如果 x 为 Promise ，则使 promise 接受 x 的状态:
+>   如果 x 为 Promise ，则使 promise 接受 x 的状态:
 >
->     如果 x 处于等待态， promise 需保持为等待态直至 x 被执行或拒绝
->     如果 x 处于执行态，用相同的值执行 promise
->     如果 x 处于拒绝态，用相同的据因拒绝 promise
->
+>   如果 x 处于等待态， promise 需保持为等待态直至 x 被执行或拒绝
+>   如果 x 处于执行态，用相同的值执行 promise
+>   如果 x 处于拒绝态，用相同的据因拒绝 promise
 > - x 为对象或函数
 >
->     把 x.then 赋值给 then 
->     如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
->     如果 then 是函数，将 x 作为函数的作用域 this 调用之。传递两个回调函数作为参数，第一个参数叫做 resolvePromise ，第二个参数叫做 rejectPromise:
->     如果 resolvePromise 以值 y 为参数被调用，则运行` [[Resolve]](promise, y)`
->     如果 rejectPromise 以据因 r 为参数被调用，则以据因 r 拒绝 promise
->     如果 resolvePromise 和 rejectPromise 均被调用，或者被同一参数调用了多次,则优先采用首次调用并忽略剩下的调用
->     如果调用 then 方法抛出了异常 e：
->     如果 resolvePromise 或 rejectPromise 已经被调用，则忽略之
->     否则以 e 为据因拒绝 promise
->     如果 then 不是函数，以 x 为参数执行 promise
->
+>   把 x.then 赋值给 then
+>   如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
+>   如果 then 是函数，将 x 作为函数的作用域 this 调用之。传递两个回调函数作为参数，第一个参数叫做 resolvePromise ，第二个参数叫做 rejectPromise:
+>   如果 resolvePromise 以值 y 为参数被调用，则运行 ` [[Resolve]](promise, y)`
+>   如果 rejectPromise 以据因 r 为参数被调用，则以据因 r 拒绝 promise
+>   如果 resolvePromise 和 rejectPromise 均被调用，或者被同一参数调用了多次,则优先采用首次调用并忽略剩下的调用
+>   如果调用 then 方法抛出了异常 e：
+>   如果 resolvePromise 或 rejectPromise 已经被调用，则忽略之
+>   否则以 e 为据因拒绝 promise
+>   如果 then 不是函数，以 x 为参数执行 promise
 > - 如果 x 不为对象或者函数，以 x 为参数执行 promise
 
 这里有两个地方很难看懂
@@ -831,9 +819,9 @@ new Promise(resolve => resolve(1))
   .then(alert); // 1000ms 后显示 2
 ```
 
-把这个这个`thenable`的then作为参数，给这个新的promise
+把这个这个 `thenable`的then作为参数，给这个新的promise
 
-直到这里，想想我们初学promise时候，promise接受的，正是一个`then`函数。
+直到这里，想想我们初学promise时候，promise接受的，正是一个 `then`函数。
 
 ### x不为对象或函数
 
@@ -843,7 +831,7 @@ new Promise(resolve => resolve(1))
 
 > If `x` is not an object or function, fulfill `promise` with `x`.
 
-就是直接`promise2.resolve(x)`
+就是直接 `promise2.resolve(x)`
 
 ## 错误处理
 
@@ -863,7 +851,7 @@ https://zh.javascript.info/promisify
 
 原来的函数需要一个回调函数，那我们九把原来的函数包起来，在一个新的promise中调用，并构造一个新的回调函数，然后原来的函数call的时候，把自己的回调函数传进去。
 
-trick使用了`...args`
+trick使用了 `...args`
 
 ## async await
 
@@ -893,7 +881,7 @@ for(let value of generator) {
 }
 ```
 
-调用`generator.next()`，返回一个对象
+调用 `generator.next()`，返回一个对象
 
 > `next()` 的结果始终是一个具有两个属性的对象：
 >
@@ -933,7 +921,7 @@ alert( generator.next(9).done ); // true
 
 https://zh.javascript.info/async-iterators-generators
 
-对象内部需要实现`[Symbol.asyncIterator]`方法
+对象内部需要实现 `[Symbol.asyncIterator]`方法
 
 > 我们使用 `for await(let value of range)` `(4)` 来进行迭代，也就是在 `for` 后面添加 `await`。它会调用一次 `range[Symbol.asyncIterator]()` 方法一次，然后调用它的 `next()` 方法获取值。
 
@@ -948,7 +936,7 @@ https://zh.javascript.info/modules-intro
 
 module只会被加载一次，比如一个module export一个对象，很多module又import了这个对象，那么内存里还是只有一个对象。因此一个module可以export一个config对象，弄成“可配置”的module。
 
-`<script type="module">`和`<scirpt>`是不一样的
+`<script type="module">`和 `<scirpt>`是不一样的
 
 ```html
 <script>
@@ -967,17 +955,17 @@ module只会被加载一次，比如一个module export一个对象，很多modu
 
 常规的导入导出就不提了
 
-`import * as obj from './xx.js'`，可以通过`obj.<export_thing>`调用
+`import * as obj from './xx.js'`，可以通过 `obj.<export_thing>`调用
 
 export也有as语法
 
 ## export default
 
-这解决了我在项目开发中什么时候import要用`{}`什么时候不用的疑惑
+这解决了我在项目开发中什么时候import要用 `{}`什么时候不用的疑惑
 
 一个文件只允许一个default export
 
-- 导入时不用指定`{}`
+- 导入时不用指定 `{}`
 - 如果export时候没有指定名称也是允许的，因为default只能有一个
 
 export也能单独列出一句，有利于实现与导出分离
@@ -1025,7 +1013,7 @@ export {default as User} from './user.js';
 
 https://zh.javascript.info/modules-dynamic-imports
 
-使用`import()`语法，返回一个promise
+使用 `import()`语法，返回一个promise
 
 > resolve 为一个包含其所有导出的模块对象。我们可以在代码中的任意位置调用这个表达式。
 
@@ -1052,7 +1040,7 @@ https://zh.javascript.info/modules-dynamic-imports
 
 https://zh.javascript.info/currying-partials
 
-`sum(a,b)`可以以`sum(a)(b)`的方式调用
+`sum(a,b)`可以以 `sum(a)(b)`的方式调用
 
 ```js
 function curry(func) {
