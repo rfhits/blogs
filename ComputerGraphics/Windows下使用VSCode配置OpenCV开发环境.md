@@ -2,8 +2,6 @@ Windows 下使用 VS Code 配置 OpenCV 开发环境
 
 通过使用 GitHub 上他人编译好的动态库，进行 OpenCV 环境的配置。
 
-唯一的不足在于本文的生成的 `.exe` 文件无法 debug，希望够用。
-
 [toc]
 
 配置环境的前置知识非常多，在此一一罗列
@@ -278,9 +276,51 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 ## launch
 
-配置 debug 用的，但是我一直没法 debug，也不知道哪儿出问题了。
+注意 `gdb` 文件路径即可。
 
-但是没关系，在 Windows 下开发 OpenCV 多少沾点。。。有钱了还是上虚拟机，不能用 debug 也没啥。
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示            
+            "type": "cppdbg", // 配置类型，这里只能为cppdbg           
+            "request": "launch", //请求配置类型，可以为launch（启动）或attach（附加）          
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            // 将要进行调试的程序的路径
+            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可            
+            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，一般设置为false            
+            "cwd": "${fileDirname}", // 调试程序时的工作目录，一般为${workspaceRoot}即代码所在目录workspaceRoot已被弃用，现改为workspaceFolder            
+            "environment": [],
+            "externalConsole": false, // 调试时是否显示控制台窗口      
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/Library/mingw64-posix/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应  
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
+            ],
+            "preLaunchTask": "build"
+        }
+    ]
+}
+```
+
+# 更新 VS Code 环境变量
+
+VS Code 有一个特别的设置，就是在外面更新了环境变量以后，VS Code 内部的 `bash` 是不知道的。
+
+原因就是 VS Code 想要保存上一次关闭时候的 `bash`，所以没有更新环境变量。
+
+比如新建一个 `Destop/print-hello.exe`，并且添加到环境变量中，然后我们正常 `Win + R, cmd`，调出命令行，是可以直接运行 `print-hello.exe`。
+
+但是，如果这个时候用 VS Code 打开一个项目，项目内部的 `bash` 是不知道有这个环境变量的，它将不能`print-hello`。
+
+解决方法就是，使用一个“感知到”新的环境变量的 bash，使用 `code <workspace>` 重新打开项目，这个时候 VS Code 才会更新环境变量。
+
+所以，这个时候，我们就在外部新建一个 `cmd`，然后一路 `cd` 到工作路径，重新打开项目。
 
 # 构建并运行
 
@@ -312,11 +352,12 @@ int main()
 
 1. OpenCV 动态链接库添加到系统环境变量
 2. `tasks.json` 中填写编译参数
+3. 更新 VS Code 环境变量
 
 至于环境变量之类的，各位老手想必是轻车熟路了。
 
-只要做好上面这两步，就能生成 `.exe` 文件了。
+只要做好上面这散步，就能生成并调试 `.exe` 文件了。
 
 [^1]: [MinGW Posix VS Win32 - zhizhiEND的文章](https://zhuanlan.zhihu.com/p/107318335)
-    
+
 [^2]: [【c/cpp 开发工具】MingGW 各版本区别及安装说明](https://blog.csdn.net/qq_29856169/article/details/119380663)
