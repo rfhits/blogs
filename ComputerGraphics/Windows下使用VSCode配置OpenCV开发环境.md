@@ -2,6 +2,8 @@ Windows 下使用 VS Code 配置 OpenCV 开发环境
 
 通过使用 GitHub 上他人编译好的动态库，进行 OpenCV 环境的配置。
 
+本博客对应 Bilibili 实操视频：https://www.bilibili.com/video/BV1BP4y1S7NX/
+
 [toc]
 
 配置环境的前置知识非常多，在此一一罗列
@@ -18,9 +20,9 @@ Windows 下使用 VS Code 配置 OpenCV 开发环境
 
 ## 选择 POSIX
 
-这里涉及到 **环境变量** 相关的知识。
+这里涉及到**环境变量**相关的知识。
 
-来到 https://sourceforge.net/projects/mingw-w64/files/
+来到 https://sourceforge.net/projects/mingw-w64/files/#mingw-w64-gcc-8-1-0
 
 看到
 
@@ -42,13 +44,11 @@ MinGW-W64 GCC-8.1.0
 
 就算不编译 OpenCV 源码，要用它提供的动态链接库，也得老老实实使用 posix 那个。
 
-下载和配置环境变量的过程可以参考 [win10 系统 VSCODE 配置opencv](https://blog.csdn.net/scott198510/article/details/125843447#1.%E4%B8%8B%E8%BD%BDMinGW%E5%B9%B6%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F)。
-
 ## 保留两个 MinGW
 
 我自己之前下载的是 win32 ，所以直接踩坑。
 
-最后我通过修改文件夹名字的方法，把两中 WinGW 都留下来，等以后要换的时候，再改回来。
+最后我通过修改文件夹名字的方法，把两个 MinGW 都留下来，等以后要换的时候，再改回来。
 
 ```
 # 我自己使用的部分系统环境变量
@@ -60,7 +60,7 @@ Path:
   ***
 ```
 
-关于 win32 和 posix 的区别，请参考[^2]。
+关于 win32 和 posix 的区别，请参考 [【c/cpp 开发工具】MingGW 各版本区别及安装说明](https://blog.csdn.net/qq_29856169/article/details/119380663)。
 
 ## 检验是否成功
 
@@ -79,7 +79,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # C/CPP 文件的编译与链接
 
 - 如果你是只会写单个 `.c/.cpp` 文件的小白
-- 如果你没有上过 **计算机组成**、**编译原理** 和 **操作系统** 这三门课
+- 如果你没有上过**计算机组成**、**编译原理**和**操作系统**这三门课
 - 如果你没有听说过 `readelf`，`objdump`，`.text/.data/.bss`
 
 我建议你先打好基础，再来配置 OpenCV，否则欲速则不达，就算手把手教会如何配置，
@@ -92,10 +92,8 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 放两个视频：
 
+- [编译链接原理](https://www.bilibili.com/video/BV1FL411g7m5)
 - [深入理解计算机系统19：链接总结：编译、链接、加载，ELF格式，符号表，符号解析，重定位，动态链接】](https://www.bilibili.com/video/BV1WU4y1b78m)
-- 强烈推荐：[编译链接原理](https://www.bilibili.com/video/BV1FL411g7m5)
-
-如果能看懂任何一个，那么就可以继续下去。
 
 # OpenCV 文件夹结构
 
@@ -103,11 +101,17 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 使用别人编译好的 OpenCV dll 文件，保证编译后的文件能够运行。
 
-这份文件在 [GitHub 仓库](https://github.com/huihut/OpenCV-MinGW-Build) 上可以下载，GitHub 下载的加速，可以参考 [FastGit 使用指南](https://doc.fastgit.org/zh-cn/guide.html)。
+这份文件在 [GitHub 仓库](https://github.com/huihut/OpenCV-MinGW-Build) 上可以下载，GitHub 下载的加速有很多办法，这里用最简单的一种：
 
-我使用的版本是 `OpenCV 4.1.0-x64`，`OpenCV 4.5.5-x64` 我试了不行。
+[GitHub仓库快速导入Gitee及同步更新](https://gitee.com/help/articles/4284)。
 
-所以为了保证成功，用 `4.1.0`。
+来到 Gitee 上别人同步好的 [镜像仓库](https://gitee.com/mirrors_huihut/OpenCV-MinGW-Build/tree/OpenCV-4.5.2-x64)，直接下载 zip 文件就行，20 MB 左右。
+
+我使用的版本是 `OpenCV 4.5.2-x64`，`OpenCV 4.5.5-x64` 我试了不行。
+
+`4.5.5` 的问题是能够生成 `.exe`  文件，但是无法运行。
+
+所以为了保证成功，用 `4.5.2`。
 
 ## 文件结构
 
@@ -167,89 +171,84 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 `c_cpp_properties.json`，`launch.json` 和 `tasks.json`。
 
-## c_cpp_properties
+## c_cpp_properties.json
 
-这个文件删了，不影响 **编译** 与 **链接**，但是 VS Code 的 IntelliCode 插件依赖于这个文件。
+这个文件删了，不影响**编译**与**链接**，但是 VS Code 的 C/C++ 插件依赖于这个文件做智能提示和代码分析。
 
 ```json
 {
     "configurations": [
         {
-            "name": "Win64",
+            "name": "Win32", // 指示平台，如 Mac/Linux/Windows，实测乱填也行
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:/Library/CPP/Packages/eigen-3.3.8",
-                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.1.0-x64/include"
+                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.5.2-x64/include"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "C:/Library/mingw64-posix/bin/g++.exe"
+            "compilerPath": "C:/Library/CPP/mingw64-posix/bin/g++.exe"
         }
     ],
     "version": 4
 }
 ```
 
-`includePath`：告诉插件，要用的依赖在哪儿，我自己电脑上还有 `eigen` 这个第三方库。
+`includePath`：告诉插件，要用的依赖在哪儿。
 
-`compilerPath`: 告诉插件，编译器的路径在哪儿
+`compilerPath`: 告诉插件，编译器的路径在哪儿。
 
-## tasks.cpp
+## tasks.json
 
 ```json
 {
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe 生成活动文件",
+            "label": "build",
             "command": "g++",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I",
-                "C:/Library/CPP/Packages/eigen-3.3.8",
-                "-I",
-                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.1.0-x64/include",
+                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.5.2-x64/include",
                 "-L",
-                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.1.0-x64/x64/mingw/bin",
+                "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.5.2-x64/x64/mingw/bin",
                 "-l",
-                "libopencv_calib3d410",
+                "libopencv_calib3d452",
                 "-l",
-                "libopencv_core410",
+                "libopencv_core452",
                 "-l",
-                "libopencv_dnn410",
+                "libopencv_dnn452",
                 "-l",
-                "libopencv_features2d410",
+                "libopencv_features2d452",
                 "-l",
-                "libopencv_flann410",
+                "libopencv_flann452",
                 "-l",
-                "libopencv_gapi410",
+                "libopencv_gapi452",
                 "-l",
-                "libopencv_highgui410",
+                "libopencv_highgui452",
                 "-l",
-                "libopencv_imgcodecs410",
+                "libopencv_imgcodecs452",
                 "-l",
-                "libopencv_imgproc410",
+                "libopencv_imgproc452",
                 "-l",
-                "libopencv_ml410",
+                "libopencv_ml452",
                 "-l",
-                "libopencv_objdetect410",
+                "libopencv_objdetect452",
                 "-l",
-                "libopencv_photo410",
+                "libopencv_photo452",
                 "-l",
-                "libopencv_stitching410",
+                "libopencv_stitching452",
                 "-l",
-                "libopencv_video410",
+                "libopencv_video452",
                 "-l",
-                "libopencv_videoio410",
+                "libopencv_videoio452",
                 "-l",
-                "opencv_ffmpeg410_64",
+                "opencv_videoio_ffmpeg452_64",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
@@ -272,9 +271,9 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 这个文件想要看懂，就需要 `g++` 命令那些参数的相关知识了，而那些参数相关的知识，就是编译和链接。
 
-`isDefault`：表示这是默认的构建任务，可以发现，`-l` 后面跟着的参数，就是我们下载的 OpenCV的 `bin` 下的 **动态链接库** 的文件名。
+`isDefault`：表示这是默认的构建任务，可以发现，`-l` 后面跟着的参数，就是我们下载的 OpenCV的 `bin` 目录下的**动态链接库**的文件名。
 
-## launch
+## launch.json
 
 注意 `gdb` 文件路径即可。
 
@@ -283,26 +282,26 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示            
-            "type": "cppdbg", // 配置类型，这里只能为cppdbg           
-            "request": "launch", //请求配置类型，可以为launch（启动）或attach（附加）          
+            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示   
+            "type": "cppdbg", // 配置类型，这里只能为cppdbg
+            "preLaunchTask": "build",
+            "request": "launch", //请求配置类型，可以为launch（启动）或attach（附加）      
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             // 将要进行调试的程序的路径
-            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可            
-            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，一般设置为false            
-            "cwd": "${fileDirname}", // 调试程序时的工作目录，一般为${workspaceRoot}即代码所在目录workspaceRoot已被弃用，现改为workspaceFolder            
+            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可        
+            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，一般设置为false       
+            "cwd": "${fileDirname}", // 调试程序时的工作目录，一般为${workspaceRoot}即代码所在目录workspaceRoot已被弃用，现改为workspaceFolder        
             "environment": [],
-            "externalConsole": false, // 调试时是否显示控制台窗口      
+            "externalConsole": false, // 调试时是否显示控制台窗口  
             "MIMode": "gdb",
-            "miDebuggerPath": "C:/Library/mingw64-posix/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应  
+            "miDebuggerPath": "C:/Library/CPP/mingw64-posix/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应  
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": false
                 }
-            ],
-            "preLaunchTask": "build"
+            ]
         }
     ]
 }
@@ -310,17 +309,17 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 # 更新 VS Code 环境变量
 
-VS Code 有一个特别的设置，就是在外面更新了环境变量以后，VS Code 内部的 `bash` 是不知道的。
+VS Code 有一个特别的设置，就是在外面更新了环境变量以后，VS Code 内部的命令行是不知道的。
 
-原因就是 VS Code 想要保存上一次关闭时候的 `bash`，所以没有更新环境变量。
+这个问题参考 [vscode终端不能识别系统设置的环境变量？ - 朝阳的回答 - 知乎](https://www.zhihu.com/question/266858097/answer/967976291)
+
+原因就是 VS Code 想要保存上一次关闭时候的命令行的历史记录，所以没有更新环境变量。
 
 比如新建一个 `Destop/print-hello.exe`，并且添加到环境变量中，然后我们正常 `Win + R, cmd`，调出命令行，是可以直接运行 `print-hello.exe`。
 
-但是，如果这个时候用 VS Code 打开一个项目，项目内部的 `bash` 是不知道有这个环境变量的，它将不能`print-hello`。
+但是，如果这个时候用 VS Code 打开一个项目，项目内部的命令行是不知道有这个环境变量的，它将不能 `print-hello`。
 
-解决方法就是，使用一个“感知到”新的环境变量的 bash，使用 `code <workspace>` 重新打开项目，这个时候 VS Code 才会更新环境变量。
-
-所以，这个时候，我们就在外部新建一个 `cmd`，然后一路 `cd` 到工作路径，重新打开项目。
+解决方法就是，使用一个“感知到”新的环境变量的命令行，使用指令 `code <workspace>` 重新打开项目，这个时候 VS Code 才会更新环境变量。
 
 # 构建并运行
 
@@ -333,18 +332,28 @@ VS Code 有一个特别的设置，就是在外面更新了环境变量以后，
 using namespace cv;
 int main()
 {
-    Mat img = imread("C:/Users/Pictures/avatar.jpg");
+    Mat img = imread("./opencv.jpeg");
     imshow("image", img);
     waitKey();
     return 0;
 }
 ```
 
+现在文件目录是这样的：
+
+```sh
+.
+├── .vscode
+│   ├── c_cpp_properties.json
+│   ├── launch.json
+│   └── tasks.json
+├── test.cpp
+└── opencv.jpeg
+```
+
 点击小三角就行。
 
 ![](https://img2022.cnblogs.com/blog/1930568/202210/1930568-20221022235832549-1492485518.png)
-
-可能无法在 VS Code 中直接运行生成好的 `text.exe` 文件，可以在资源管理器中双击 `.exe` 文件运行。
 
 # 总结
 
@@ -356,8 +365,4 @@ int main()
 
 至于环境变量之类的，各位老手想必是轻车熟路了。
 
-只要做好上面这散步，就能生成并调试 `.exe` 文件了。
-
-[^1]: [MinGW Posix VS Win32 - zhizhiEND的文章](https://zhuanlan.zhihu.com/p/107318335)
-
-[^2]: [【c/cpp 开发工具】MingGW 各版本区别及安装说明](https://blog.csdn.net/qq_29856169/article/details/119380663)
+只要做好上面这三步，就能生成并调试 `.exe` 文件了。
