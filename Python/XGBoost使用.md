@@ -137,7 +137,7 @@ for param in tune_params:
 
 # api
 
-预测结果并输出概率：
+### 预测结果并输出概率
 
 ```python
 model.fit(x,y)
@@ -145,10 +145,33 @@ model.predict(test_x)
 model.predict_proba(test_x)
 ```
 
-保存与加载模型：
+### 保存与加载模型
 
 ```python
 model.save_model('model.json')
 model = xgb.XGBClassifier()
 model.load_model('./model_tuned.json')
+```
+
+### 特征重要性
+
+参考 [How to get feature importance in xgboost?](https://stackoverflow.com/questions/37627923/how-to-get-feature-importance-in-xgboost)
+
+两种方法：
+
+1. 画图
+2. 转 DataFrame 看
+
+画图：
+
+```python
+from xgboost import plot_importance
+plot_importance(model, max_num_features = 15)
+pyplot.show()
+```
+
+转 DataFrame
+
+```python
+featimp_base = pd.DataFrame(model_base.get_booster().get_fscore().items(), columns=['feature','importance']).sort_values('importance', ascending=False)
 ```
