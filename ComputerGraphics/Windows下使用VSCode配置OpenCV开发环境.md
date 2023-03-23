@@ -13,7 +13,7 @@ Windows 下使用 VSCode 配置 OpenCV 开发环境
 3. C/CPP 文件的编译与链接
 4. 动态链接与静态链接
 5. OpenCV 编译后的文件夹的结构
-6. g++ 编译命令中 `-I, -L, -l` 三个参数的含义
+6. g++ 编译命令中 `-g, -I, -L, -l` 4 个参数的含义
 7. VS Code 开发 CPP 项目，生成的三个 `.json` 文件的作用
 
 # MinGW 安装
@@ -78,7 +78,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 # C/CPP 文件的编译与链接
 
-- 如果只会写单个 `.c/.cpp` 文件的小白
+- 如果只会写单个 `.c/.cpp` 文件
 - 如果没有上过**计算机组成**、**编译原理**和**操作系统**这三门课
 - 如果没有听说过 `readelf`，`objdump`，`.text/.data/.bss`
 
