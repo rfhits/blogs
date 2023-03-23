@@ -1,4 +1,4 @@
-Windows 下使用 VS Code 配置 OpenCV 开发环境
+Windows 下使用 VSCode 配置 OpenCV 开发环境
 
 通过使用 GitHub 上他人编译好的动态库，进行 OpenCV 环境的配置。
 
@@ -46,18 +46,18 @@ MinGW-W64 GCC-8.1.0
 
 ## 保留两个 MinGW
 
-我自己之前下载的是 win32 ，所以直接踩坑。
+我自己之前下载的是 win32，所以直接踩坑。
 
 最后我通过修改文件夹名字的方法，把两个 MinGW 都留下来，等以后要换的时候，再改回来。
 
 ```
 # 我自己使用的部分系统环境变量
-GCC_WIN32_HOME: C:\Library\mingw64-posix
-GCC_POSIX_HOME: C:\Library\mingw64-win32
-Path: 
-  ***
+GCC_WIN32_HOME: C:\Library\CPP\mingw64-posix
+GCC_POSIX_HOME: C:\Library\CPP\mingw64-win32
+Path:
+  ...
   %GCC_POSIX_HOME%\bin
-  ***
+  ...
 ```
 
 关于 win32 和 posix 的区别，请参考 [【c/cpp 开发工具】MingGW 各版本区别及安装说明](https://blog.csdn.net/qq_29856169/article/details/119380663)。
@@ -78,22 +78,24 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 # C/CPP 文件的编译与链接
 
-- 如果你是只会写单个 `.c/.cpp` 文件的小白
-- 如果你没有上过**计算机组成**、**编译原理**和**操作系统**这三门课
-- 如果你没有听说过 `readelf`，`objdump`，`.text/.data/.bss`
+- 如果只会写单个 `.c/.cpp` 文件的小白
+- 如果没有上过**计算机组成**、**编译原理**和**操作系统**这三门课
+- 如果没有听说过 `readelf`，`objdump`，`.text/.data/.bss`
 
-我建议你先打好基础，再来配置 OpenCV，否则欲速则不达，就算手把手教会如何配置，
+我建议先打好基础，再来配置 OpenCV，否则欲速则不达，就算手把手教会如何配置，
 
 **知其然而不知其所以然**，下回配置环境还是得折腾一遍。
 
 我先抛出一个问题：
 
-> 一句简单的 `printf("hello world");`，在我的电脑上编译出了 `.exe` 文件，能直接在另一台电脑上运行？我为什么不用手动实现 `printf` 这个函数，别人也不用实现，这个函数到底定义在了哪里，实现在了哪里？
+> 一句简单的 `printf("hello world");`，在我的电脑上编译出了 `.exe` 文件，为什么能直接在另一台电脑上运行？我为什么不用手动实现 `printf` 这个函数，别人也不用实现，这个函数到底定义在了哪里，实现在了哪里？
 
 放两个视频：
 
 - [编译链接原理](https://www.bilibili.com/video/BV1FL411g7m5)
-- [深入理解计算机系统19：链接总结：编译、链接、加载，ELF格式，符号表，符号解析，重定位，动态链接】](https://www.bilibili.com/video/BV1WU4y1b78m)
+- [深入理解计算机系统 19：链接总结：编译、链接、加载，ELF 格式，符号表，符号解析，重定位，动态链接】](https://www.bilibili.com/video/BV1WU4y1b78m)
+
+此处不需要死记硬背，但是需要有一个大概的了解。
 
 # OpenCV 文件夹结构
 
@@ -103,13 +105,13 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 这份文件在 [GitHub 仓库](https://github.com/huihut/OpenCV-MinGW-Build) 上可以下载，GitHub 下载的加速有很多办法，这里用最简单的一种：
 
-[GitHub仓库快速导入Gitee及同步更新](https://gitee.com/help/articles/4284)。
+[GitHub 仓库快速导入 Gitee 及同步更新](https://gitee.com/help/articles/4284)。
 
 来到 Gitee 上别人同步好的 [镜像仓库](https://gitee.com/mirrors_huihut/OpenCV-MinGW-Build/tree/OpenCV-4.5.2-x64)，直接下载 zip 文件就行，20 MB 左右。
 
 我使用的版本是 `OpenCV 4.5.2-x64`，`OpenCV 4.5.5-x64` 我试了不行。
 
-`4.5.5` 的问题是能够生成 `.exe`  文件，但是无法运行。
+`4.5.5` 的问题是能够生成 `.exe` 文件，但是无法运行。
 
 所以为了保证成功，用 `4.5.2`。
 
@@ -149,19 +151,23 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 对于我来说，是将 `C:\Library\CPP\Packages\OpenCV-MinGW-Build-OpenCV-4.1.0-x64\x64\mingw\bin` 添加到环境变量中。
 
-这一步的作用类似于告诉系统 `prinf()` 这个函数的二进制文件在哪儿。
+这一步的作用类似于告诉系统 `printf()` 这个函数的二进制文件在哪儿。
 
 # g++ 命令的参数
 
-介绍三个参数 `-I`、`-L`  和 `-l`。
+这个东西叫做 `flag`，Google 搜索 `g++ flag ...` 就可以查看详细的作用。
 
-`-I`  告诉编译器，头文件里的 `include<package>` 去哪儿找。
+介绍 4 个参数 `-g`、`-I `、`-L ` 和 `-l`。
 
-`-L` 告诉编译器，添加一个要动态链接的目录
+`-g`: 编译出的文件带供 GDB 使用的 debug 信息。必须要加上，不然没法 debug。
 
-`-l` 指定具体的动态链接库的名称
+`-I`: 告诉编译器，头文件里的 `include<package>` 去哪儿找。
 
-具体可以参考 [gcc -L -l -I -i参数](https://blog.csdn.net/woaiclh13/article/details/88719324)。
+`-L`: 告诉编译器，添加一个要动态链接的目录
+
+`-l`: 指定具体的动态链接库的名称
+
+具体可以参考 [gcc -g option flag](https://www.rapidtables.com/code/linux/gcc/gcc-g.html) 和 [gcc -L -l -I -i 参数](https://blog.csdn.net/woaiclh13/article/details/88719324) 这两篇文章。
 
 # VS Code 项目配置
 
@@ -184,11 +190,7 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
                 "${workspaceFolder}/**",
                 "C:/Library/CPP/Packages/OpenCV-MinGW-Build-OpenCV-4.5.2-x64/include"
             ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
+            "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
             "compilerPath": "C:/Library/CPP/mingw64-posix/bin/g++.exe"
         }
     ],
@@ -255,9 +257,7 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -271,7 +271,7 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 这个文件想要看懂，就需要 `g++` 命令那些参数的相关知识了，而那些参数相关的知识，就是编译和链接。
 
-`isDefault`：表示这是默认的构建任务，可以发现，`-l` 后面跟着的参数，就是我们下载的 OpenCV的 `bin` 目录下的**动态链接库**的文件名。
+`isDefault`：表示这是默认的构建任务，可以发现，`-l` 后面跟着的参数，就是我们下载的 OpenCV 的 `bin` 目录下的**动态链接库**的文件名。
 
 ## launch.json
 
@@ -282,19 +282,19 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示   
-            "type": "cppdbg", // 配置类型，这里只能为cppdbg
+            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示
+            "type": "cppdbg", // 配置类型，这里只能为 cppdbg
             "preLaunchTask": "build",
-            "request": "launch", //请求配置类型，可以为launch（启动）或attach（附加）      
+            "request": "launch", //请求配置类型，可以为 launch（启动）或 attach（附加）
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             // 将要进行调试的程序的路径
-            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可        
-            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，一般设置为false       
-            "cwd": "${fileDirname}", // 调试程序时的工作目录，一般为${workspaceRoot}即代码所在目录workspaceRoot已被弃用，现改为workspaceFolder        
+            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可
+            "stopAtEntry": false, // 设为 true 时程序将暂停在程序入口处，一般设置为 false
+            "cwd": "${fileDirname}", // 调试程序时的工作目录，一般为${workspaceRoot}即代码所在目录 workspaceRoot 已被弃用，现改为 workspaceFolder
             "environment": [],
-            "externalConsole": false, // 调试时是否显示控制台窗口  
+            "externalConsole": false, // 调试时是否显示控制台窗口
             "MIMode": "gdb",
-            "miDebuggerPath": "C:/Library/CPP/mingw64-posix/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应  
+            "miDebuggerPath": "C:/Library/CPP/mingw64-posix/bin/gdb.exe", // miDebugger 的路径，注意这里要与 MinGw 的路径对应
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -311,11 +311,11 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 VS Code 有一个特别的设置，就是在外面更新了环境变量以后，VS Code 内部的命令行是不知道的。
 
-这个问题参考 [vscode终端不能识别系统设置的环境变量？ - 朝阳的回答 - 知乎](https://www.zhihu.com/question/266858097/answer/967976291)
+这个问题参考 [vscode 终端不能识别系统设置的环境变量？ - 朝阳的回答 - 知乎](https://www.zhihu.com/question/266858097/answer/967976291)
 
 原因就是 VS Code 想要保存上一次关闭时候的命令行的历史记录，所以没有更新环境变量。
 
-比如新建一个 `Destop/print-hello.exe`，并且添加到环境变量中，然后我们正常 `Win + R, cmd`，调出命令行，是可以直接运行 `print-hello.exe`。
+比如新建一个 `Desktop/print-hello.exe`，并且添加到环境变量中，然后我们正常 `Win + R, cmd`，调出命令行，是可以直接运行 `print-hello.exe`。
 
 但是，如果这个时候用 VS Code 打开一个项目，项目内部的命令行是不知道有这个环境变量的，它将不能 `print-hello`。
 
