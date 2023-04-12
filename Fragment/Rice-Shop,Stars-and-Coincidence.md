@@ -44,7 +44,7 @@ Gmail 只能通过网页访问了，网易邮箱和 Spark 均不行。
 
 下午去取快递的时候在微信上听了一阵子，很舒缓的旋律，配合黄昏有种把时间拉得很长很长的感觉，彩虹合唱团的版本或许我会更喜欢一些。
 
-《[米店](https://music.163.com/song?id=26494698)》来自专辑《[白银饭店](https://music.163.com/album?id=2508244)》，这个名字让我想起王小波的《[白银时代](https://book.douban.com/subject/1082150/)》和林耀德的《[银碗盛雪](https://books.google.com.sg/books/about/%E9%8A%80%E7%A2%97%E7%9B%9B%E9%9B%AA.html?id=NRhbAAAAIAAJ&redir_esc=y)》（我都没看过，遗憾，白银饭店里应该用的是「银碗」吧），专辑的详情里还提到「万晓利」，God，怎么又是你万先生，你朋友真多。。。《[却也是蜜茶](https://music.163.com/song?id=516653057)》就是万晓利的，但是我已经忘记哪一张专辑了，欸，但是我还记得一点文案。
+《[米店](https://music.163.com/song?id=26494698)》来自专辑《[白银饭店](https://music.163.com/album?id=2508244)》，这个名字让我想起王小波的《[白银时代](https://book.douban.com/subject/1082150/)》和林燿德的《[银碗盛雪](https://books.google.com.sg/books/about/%E9%8A%80%E7%A2%97%E7%9B%9B%E9%9B%AA.html?id=NRhbAAAAIAAJ&redir_esc=y)》（我都没看过，遗憾，白银饭店里应该用的是「银碗」吧），专辑的详情里还提到「万晓利」，God，怎么又是你万先生，你朋友真多。。。《[却也是蜜茶](https://music.163.com/song?id=516653057)》就是万晓利的，但是我已经忘记哪一张专辑了，欸，但是我还记得一点文案。
 
 早上听《米店》真是个不好的主意，这样的歌需要一点奇妙的气氛，让人发呆、看着时间慢慢流逝、心灵彻底放松的气氛。
 
@@ -61,6 +61,8 @@ Gmail 只能通过网页访问了，网易邮箱和 Spark 均不行。
 ![img](https://img2023.cnblogs.com/blog/1930568/202303/1930568-20230331144837569-102117570.png)
 
 <!-- ![梨苗](../assets/image/Fragment/Rice-Shop%2CStars-and-Coincidence/pear-seedling.jpg) -->
+
+2023-04-12 更新：我第一次听《米店》这首歌可能来源于同学朋友圈的分享
 
 ---
 
