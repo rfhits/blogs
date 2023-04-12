@@ -1,4 +1,4 @@
-XGBoost 使用
+XGBoost 学习笔记
 
 Datetime: 2023-03-12T20:25+08:00
 
@@ -150,7 +150,7 @@ model.predict_proba(test_x)
 ```python
 model.save_model('model.json')
 model = xgb.XGBClassifier()
-model.load_model('./model_tuned.json')
+model.load_model('./model.json')
 ```
 
 ### 特征重要性
