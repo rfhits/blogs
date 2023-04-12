@@ -147,6 +147,12 @@ merge 得到的这个 DataFrame 的 index 竟然来自 right？
 
 所以 merge 我大多数都是使用 `right_index=True, left_index=True` 。
 
+### 合并多个表
+
+merge 只能合并两个表，有时候要合并一堆表
+
+`pd.concat([df1, df2, ...], axis=1, how='inner')`，StackOverflow 上有对应问题
+
 # 异常值处理
 
 ## 甄别缺失值
@@ -243,6 +249,38 @@ apply 通过调节 axis 参数可以接受一个 col 或者 row 当作对象，`
 ## one-hot 编码
 
 `pd.get_dummies(X, columns=[col1, col2])`
+
+## 随机取数
+
+有内置的 random 模块和第三方 numpy.random
+
+有几个注意点：
+
+1. seed
+2. replace：取出来的结果是否唯一
+3. 内置 random 叫做 sample，numpy 叫做 choice
+
+```python
+import random
+random.seed(26)
+random.sample([i for i in range(10)], k=5)
+```
+
+```python
+import numpy as np
+rng = np.random.default_rng(26)
+rng.choice([1,2,3,4], size=2, replace=False)
+```
+
+还有一种方法是 shuffle，好处是可以拿到剩下的没被选中的
+
+```python
+size = 3
+arr = [i for i in range(10)]
+rng.shuffle(arr)
+arr[:size]
+arr[size:]
+```
 
 # 接口速查
 
