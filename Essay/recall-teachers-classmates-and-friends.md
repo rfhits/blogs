@@ -42,7 +42,7 @@ Tags: Memory
 
 # 同学与朋友
 
-我对[《你的名字。》](https://movie.douban.com/subject/26683290/)中「结绳」象征「结缘」有着非常的喜欢。我认为人与人之间的关系就像结绳一样，随着了解的深入，结绳越来越牢固，但是人之间难免会有分别甚至是永别，我有时只能无力地看着结绳越变越松，最后随着时间的流逝，被一刀斩断。
+我对《[你的名字。](https://movie.douban.com/subject/26683290/)》中「结绳」象征「结缘」有着非常的喜欢。我认为人与人之间的关系就像结绳一样，随着了解的深入，结绳越来越牢固，但是人之间难免会有分别甚至是永别，我有时只能无力地看着结绳越变越松，最后随着时间的流逝，被一刀斩断。
 
 有时候结绳刚系上，我就好像看到了它断开的样子，就像养花花草草前做好了失败的心理预期一样，有些人自认识起我便判断我们之间的关系不会太深与太久。
 
@@ -112,10 +112,10 @@ Tags: Memory
 
 遥远的记忆就像断线的珍珠，我小心翼翼地把它们从「生命的角落」中取出来，重新串好，再次把玩。有一天整理自己高中的「遗物」，发现 [随身听](https://en.wikipedia.org/wiki/Personal_stereo)（此处特地超链接防止以后的读者不知道什么是随身听）里还存着四五年前在语文课上「课前三分钟」的幻灯片。这个随身听甚至是我妈在江西时候捡到的，岁数比我妹大，还可以应急当 U 盘用。高三的我很喜欢朴树的《那些花儿》，每天睡前都听几遍，也在课堂上放了视频。语文老师也很喜欢这首歌，她还喜欢朴树的另外两首歌是《平凡之路》和《清白之年》。
 
-<!-- ![高中课前三分钟幻灯片](../assets/image/Essay/%E5%9B%9E%E5%BF%86%EF%BC%9A%E8%80%81%E5%B8%88%E3%80%81%E5%90%8C%E5%AD%A6%E4%B8%8E%E6%9C%8B%E5%8F%8B/%E9%AB%98%E4%B8%AD%E8%AF%BE%E5%89%8D%E4%B8%89%E5%88%86%E9%92%9F%E5%B9%BB%E7%81%AF%E7%89%87.jpg) -->
+<!-- ![高中课前三分钟幻灯片](../assets/image/Essay/recall-teachers-classmates-and-friends/%E9%AB%98%E4%B8%AD%E8%AF%BE%E5%89%8D%E4%B8%89%E5%88%86%E9%92%9F%E5%B9%BB%E7%81%AF%E7%89%87.jpg) -->
 
 ![高中课前三分钟幻灯片](https://img2023.cnblogs.com/blog/1930568/202303/1930568-20230318163756302-1995848973.png)
 
 下面这个视频就是当时在课堂上放的，没想到这么多年过去了，竟然还在。
 
-<iframe src="https://player.bilibili.com/player.html?aid=3365756&bvid=BV1Fs411o7bo&cid=5327631&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
+<iframe src="https://player.bilibili.com/player.html?aid=3365756&bvid=BV1Fs411o7bo&cid=5327631&page=1&high_quality=1&danmaku=0&autoplay=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
