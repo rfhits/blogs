@@ -1,5 +1,11 @@
 2023-04-15 QA on friendship
 
+Datetime: 2023-04-15T07:50+08:00
+
+Categories: Essay
+
+Tags: Diary
+
 我很想把这一篇随笔起名为 Dandelion's Promise。
 
 一次参加圆桌会议的笔记与感想，是一些问题和我自己的快问快答，难免幼稚。
