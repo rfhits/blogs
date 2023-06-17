@@ -118,7 +118,7 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ## 文件结构
 
 ```bash
-C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
+C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.5.2-X64
 ├─etc # 不用管
 ├─include # 头文件
 │  └─opencv2
@@ -149,7 +149,7 @@ C:\LIBRARY\CPP\PACKAGES\OPENCV-MINGW-BUILD-OPENCV-4.1.0-X64
 
 为了让第三方的动态链接库生效，我们需要将动态链接库添加到系统环境变量。
 
-对于我来说，是将 `C:\Library\CPP\Packages\OpenCV-MinGW-Build-OpenCV-4.1.0-x64\x64\mingw\bin` 添加到环境变量中。
+对于我来说，是将 `C:\Library\CPP\Packages\OpenCV-MinGW-Build-OpenCV-4.5.2-x64\x64\mingw\bin` 添加到环境变量中。
 
 这一步的作用类似于告诉系统 `printf()` 这个函数的二进制文件在哪儿。
 
