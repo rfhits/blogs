@@ -91,8 +91,12 @@ Categories: Fragment
 
 燕子分布非常广，北航体育馆也里有一个窝。
 
+<!-- <video controls
+    src="./swallow-in-BUAA.mp4">
+video not supported
+</video> -->
+
 <video controls
-    src="./swallow-in-BUAA.mp4"
     src="https://raw.githubusercontent.com/rfhits/blogs/main/Fragment/card%2Cswallow-and-electron-cloud/swallow-in-BUAA.mp4">
 video not supported
 </video>
