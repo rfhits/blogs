@@ -1,6 +1,8 @@
-SettingWithCopyWarning 笔记
+what is setting with copy warning in pandas
 
-Datetime: 2023/02/11T17:18:00+08:00
+Subtitle: 什么是 Pandas 中的 SettingWithCopyWarning
+
+Created: 2023-02-11T17:18:00+08:00
 
 Categories: Python
 
