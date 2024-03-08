@@ -1,15 +1,19 @@
-3B1B 观看笔记
+neural networks 3b1b watching notes
 
-Datetime: 2023-03-26T23:20+08:00
+Created: 2023-03-26T23:20+08:00
+Modified: 2024-03-08T09:30+08:00
 
 Categories: MachineLearning
 
 [Neural Networks Playlist on Youtube](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
+[3 \- Backprop and Neural Networks\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Nf4y1K7kU?p=3)
 
 -   what is mlp?
 -   cost function and params
 -   gradient descent
 -   back propagation
+    -   computational graph: forward propagation
+    -   pass gradients back along the graph
 
 # serial 1
 
@@ -102,7 +106,7 @@ we can visualize the matrix for each neuron in second layer, as mentioned before
 
 求 cost 对 weight 的梯度，实际上就是在求 cost 对那一条线的梯度
 
-<!-- ![mlp](../assets/image/MachineLearning/neural-network-3b1b-watching-notes/mlp.svg) -->
+<!-- ![mlp](./mlp.svg) -->
 
 ![img](https://img2023.cnblogs.com/blog/1930568/202303/1930568-20230326232007511-1090559982.svg)
 
@@ -139,3 +143,11 @@ $\frac{\partial n_1}{\partial n_3} = ReLU'(...) \times w$
 最后求绿色的 weight，就是把 n3 和 n4 看作 n1 和 n2，repeat。
 
 在反向传播的过程中，虽然我们在结果上只需要更新 w 和 b，但是每个 neuron 也要求梯度。
+
+# review
+
+来自 Standford 的 slide
+
+<!-- ![example of bp](./example-of-bp.png) -->
+
+![example of bp](https://img2023.cnblogs.com/blog/1930568/202403/1930568-20240308093001129-1105459714.png)
