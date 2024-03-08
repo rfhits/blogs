@@ -142,12 +142,16 @@ $\frac{\partial n_1}{\partial n_3} = ReLU'(...) \times w$
 
 最后求绿色的 weight，就是把 n3 和 n4 看作 n1 和 n2，repeat。
 
-在反向传播的过程中，虽然我们在结果上只需要更新 w 和 b，但是每个 neuron 也要求梯度。
+在反向传播的过程中，虽然我们在结果上只需要更新 w 和 b，但是每个 neuron 也要求梯度，由于每个 neuron 对最终结果的贡献路径不止一条，所以 neuron 的求梯度式子中会有 `+` 号，就好像多元微积分里的对参数求导一样。
 
-# review
+# review & implement
 
-来自 Standford 的 slide
+来自 Stanford 的 slide
 
 <!-- ![example of bp](./example-of-bp.png) -->
 
 ![example of bp](https://img2023.cnblogs.com/blog/1930568/202403/1930568-20240308093001129-1105459714.png)
+
+<!-- ![implement-of-forward-and-backward-api](./implement-of-forward-and-backward-api.png) -->
+
+![img](https://img2023.cnblogs.com/blog/1930568/202403/1930568-20240308094559322-1794651568.png)
