@@ -127,6 +127,4 @@ callee-save 的意思是说，如果 callee 想要用这个寄存器，那么就
 
 所以，callee-save 的寄存器在函数调用前后保持不变。
 
-<!-- ![](./caller-callee.svg) -->
-
-![caller-callee](https://img2023.cnblogs.com/blog/1930568/202403/1930568-20240329095813903-396118734.svg)
+![](./caller-callee.svg)
