@@ -1,8 +1,9 @@
+侯捷 C++ 课程笔记
 CPP Houjie
 
-Subtitle: 侯捷 C++ 课程笔记
 Created: 2023-11-25T10:40+08:00
-Categories: CPP
+Categories: C-CPP
+
 [toc]
 
 # 面向对象编程（上）
