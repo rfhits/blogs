@@ -1,4 +1,8 @@
-常用 Git 命令
+git cheatsheet
+
+-   Modified: 2024-01-04T11:32+08:00
+
+Categories: Git
 
 [toc]
 
@@ -199,3 +203,10 @@ git push origin --delete dev
 # github 加速
 
 参考[fastgit 使用指南](https://doc.fastgit.org/zh-cn/guide.html)
+
+# Git 数据模型
+
+[版本控制\(Git\) · the missing semester of your cs education](https://missing-semester-cn.github.io/2020/version-control/)
+
+1. 提交记录构成有向无环图，比如 merge 后的提交记录会有两个 parent
+2. 数据包括 tree，blob 和 commit，通过 sha1 得到哈希值存储
