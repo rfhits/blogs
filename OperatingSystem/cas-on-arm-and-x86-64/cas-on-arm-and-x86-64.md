@@ -6,6 +6,8 @@ cas on ARM and x86_64
 -   Categories: OperatingSystem
 -   Tags: lock-free
 
+[toc]
+
 # CAS 的想法从与 x86_x64 上的 cmpxchg 指令
 
 ## CAS 背景
@@ -67,7 +69,7 @@ else:
 
 中间六行代码被抽离出来成为了汇编指令 `cmpxchg [mem_addr] reg#src `
 
-## GPT explain `cmpxchg` instruction
+## `cmpxchg` instruction explained by GPT
 
 ### Syntax
 
@@ -372,9 +374,9 @@ atomic_compare_exchange_strong 如果发现 LL/SC 被打断会再次尝试，直
 # [小心 LL/SC 带来的 False Sharing](https://cloud.tencent.com/developer/article/1516818)
 
 2.3.3 False sharing(伪共享)
-现代处理器中，cache 是以 cache line 为单位的，一个 cache line 长度 L 为 64-128 字节，并且 cache line 呈现长度进一步增加的趋势。主存储和 cache 数据交换在 L 字节大小的 L 块中进行，即使缓存行中的一个字节发生变化，所有行都被视为无效，必需和主存进行同步。存在这么一个场景，有两个变量 share_1 和 share_2，两个变量内存地址比较相近被加载到同一 cache line 中，cpu core1 对变量 share_1 进行操作，cpu core2 对变量 share_2 进行操作，从 cpu core2 的角度看，cpu core1 对 share_1 的修改，会使得 cpu core2 的 cahe line 中的 share_2 无效，这种场景叫做 False sharing(伪共享)。
+现代处理器中，cache 是以 cache line 为单位的，一个 cache line 长度 L 为 64-128 字节，并且 cache line 呈现长度进一步增加的趋势。主存储和 cache 数据交换在 L 字节大小的 L 块中进行，即使缓存行中的一个字节发生变化，所有行都被视为无效，必需和主存进行同步。存在这么一个场景，有两个变量 share_1 和 share_2，两个变量内存地址比较相近被加载到同一 cache line 中，cpu core1 对变量 share_1 进行操作，cpu core2 对变量 share_2 进行操作，从 cpu core2 的角度看，cpu core1 对 share_1 的修改，会使得 cpu core2 的 cache line 中的 share_2 无效，这种场景叫做 False sharing(伪共享)。
 
-由于 LL/SC 对比较依赖于 cache line，当出现 False sharing 的时候可能会造成比较大的性能损失。加载连接（LL）操作连接缓存行，而存储状态（SC)）操作在写之前，会检查本行中的连接标志是否被重置。如果标志被重置，写就无法执行，SC 返回 false。考虑到 cache line 比较长，在多核 cpu 中，cpu core1 在一个 while 循环中变量 share_1 执行 CAS 修改，而其他 cpu core i 在对同一 cache line 中的变量 share_i 进行修改。在极端情况下会出现这样的一个 livelock(活锁)现象：每次 cpu core1 在 LL(share_1)后，在准备进行 SC 的时候，其他 cpu core 修改了同一 cache line 的其他变量 share_i，这样使得 cache line 发生了改变，SC 返回 false，于是 cpu core1 又进入下一个 CAS 循环，考虑到 cache line 比较长，cache line 的任何变更都会导致 SC 返回 false，这样使得 cup core1 在一段时间内一直在进行一个 CAS 循环，cpu core1 都跑到 100%了，但是实际上没做什么有用功。
+由于 LL/SC 对比较依赖于 cache line，当出现 False sharing 的时候可能会造成比较大的性能损失。加载连接（LL）操作连接缓存行，而存储状态（SC）操作在写之前，会检查本行中的连接标志是否被重置。如果标志被重置，写就无法执行，SC 返回 false。考虑到 cache line 比较长，在多核 cpu 中，cpu core1 在一个 while 循环中变量 share_1 执行 CAS 修改，而其他 cpu core i 在对同一 cache line 中的变量 share_i 进行修改。在极端情况下会出现这样的一个 livelock(活锁)现象：每次 cpu core1 在 LL(share_1)后，在准备进行 SC 的时候，其他 cpu core 修改了同一 cache line 的其他变量 share_i，这样使得 cache line 发生了改变，SC 返回 false，于是 cpu core1 又进入下一个 CAS 循环，考虑到 cache line 比较长，cache line 的任何变更都会导致 SC 返回 false，这样使得 cup core1 在一段时间内一直在进行一个 CAS 循环，cpu core1 都跑到 100%了，但是实际上没做什么有用功。
 
 为了杜绝这样的 False sharing 情况，我们应该使得不同的共享变量处于不同 cache line 中，一般情况下，如果变量的内存地址相差住够远，那么就会处于不同的 cache line，于是我们可以采用填充（padding）来隔离不同共享变量，如下：
 
@@ -390,3 +392,70 @@ struct Foo {
 上面，nShared1 和 nShared2 就会处于不同的 cache line，cpu core1 对 nShared1 的 CAS 操作就不会被其他 core 对 nShared2 的修改所影响了。
 
 上面提到的 cpu core1 对 share_1 的修改会使得 cpu core2 的 share_2 变量的 cache line 失效，造成 cpu core2 需重新加载同步 share_2；同样，cpu core2 对 share_2 变量的修改，也会使得 cpu core1 所在的 cache line 实现，造成 cpu core1 需要重新加载同步 share_1。这样 cpu core1 的一个修改造成 cpu core2 的一个 cache miss，cpu core2 的一个修改造成 cpu core1 的一个 cache miss 的反复现象就是所谓的 Cache ping-pong 问题，出现大量 Cache ping-pong 意味着大量的 cache miss，会造成巨大的性能损失。我们同样可以采用填充（padding）来隔离不同共享变量来解决 cache ping-pong。
+
+## [padding 的其他写法 by Claude](https://poe.com/s/qPI9XGri3SyMIkn71p0U)
+
+除了使用 padding 字段，还有以下几种方法让变量落在不同的 cache line 上：
+
+1. 使用 alignas 关键字:
+
+```cpp
+struct Foo {
+    alignas(64) int volatile nShared1;
+    alignas(64) int volatile nShared2;
+};
+```
+
+2. 使用编译器特定的属性:
+
+```cpp
+// GCC/Clang
+struct Foo {
+    int volatile nShared1 __attribute__((aligned(64)));
+    int volatile nShared2 __attribute__((aligned(64)));
+};
+
+// MSVC
+struct Foo {
+    __declspec(align(64)) int volatile nShared1;
+    __declspec(align(64)) int volatile nShared2;
+};
+```
+
+3. 使用 C++17 的 new alignment 操作符:
+
+```cpp
+alignas(std::hardware_destructive_interference_size) int volatile nShared1;
+alignas(std::hardware_destructive_interference_size) int volatile nShared2;
+```
+
+4. 使用标准库提供的特定宏(C++17):
+
+```cpp
+#include <new>
+struct Foo {
+    alignas(std::hardware_constructive_interference_size) int volatile nShared1;
+    alignas(std::hardware_constructive_interference_size) int volatile nShared2;
+};
+```
+
+需要注意的是：
+
+-   hardware_destructive_interference_size 表示避免 false sharing 所需的最小对齐尺寸
+-   hardware_constructive_interference_size 表示让数据落在同一 cache line 的最大对齐尺寸
+-   不同平台上这些值可能不同，但通常是 64 或 128 字节
+
+要确认具体对齐是否成功，可以使用:
+
+```cpp
+std::cout << offsetof(Foo, nShared1) << std::endl;
+std::cout << offsetof(Foo, nShared2) << std::endl;
+```
+
+要检查对齐后的结构体大小：
+
+```cpp
+std::cout << sizeof(Foo) << std::endl;
+```
+
+我可以提供更多关于这些方法的详细信息，如果你感兴趣的话。
