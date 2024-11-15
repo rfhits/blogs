@@ -8,6 +8,7 @@ Categories: C-CPP
 # custom allocator
 
 `std::allocator` 是无状态的，实测最简单的 allocator 只需要：
+
 1. value_type
 2. allocate
 3. deallocate
@@ -21,7 +22,7 @@ container 本身就是通过 allocator_traits 来使用 construct 和 destroy。
 1. construct：在 allocate 后调用，在分配的内存上初始化对象
 2. destroy: 在 deallocate 前调用，在内存上析构分配的对象
 
-以下是一个非常简单的 allocator 实现。
+以下是一个直接包装了 `::new` 和 `::delete` 的 allocator 实现。
 
 ```CPP
 #include <vector>
@@ -116,7 +117,7 @@ PMR 就说，好吧，那我们把 allocator 固定下来，全都使用 `polymo
 
 > The class template std::pmr::polymorphic_allocator is an Allocator which exhibits different allocation behavior depending upon the std::pmr::memory_resource from which it is constructed. Since memory_resource uses runtime polymorphism to manage allocations, different container instances with polymorphic_allocator as their static allocator type are interoperable, but can behave as if they had different allocator types.
 > All specializations of polymorphic_allocator meet the allocator completeness requirements.
-> [std::pmr::polymorphic\_allocator \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/polymorphic_allocator)
+> [std::pmr::polymorphic_allocator \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/polymorphic_allocator)
 
 `memory_resource` 提供对原始内存的管理接口，类似 malloc 和 free：
 
@@ -130,17 +131,18 @@ memory_resource:
 
 `polymorphic_allocator<T>` 只是在原始内存 `memory_resource` 上提供具体类型的抽象，比如需要 n 个类型为 T 的对象，底层调用 memory_resource 获取原始内存。
 
-> `std::pmr::polymorphic_allocator<T>::allocate`: 
+> `std::pmr::polymorphic_allocator<T>::allocate`:
 > Allocates storage for n objects of type T using the underlying memory resource. Equivalent to return static_cast<T*>(resource()->allocate(n * sizeof(T), alignof(T)));.
-> [std::pmr::polymorphic\_allocator<T>::allocate \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/polymorphic_allocator/allocate)
+> [std::pmr::polymorphic_allocator<T>::allocate \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/polymorphic_allocator/allocate)
 
-construct 和 destroy  通过 allocator_traits 实现：
+construct 和 destroy 通过 allocator_traits 实现：
 
 ```CPP
 /// Partial specialization for std::pmr::polymorphic_allocator
   template<typename _Tp>
     struct allocator_traits<pmr::polymorphic_allocator<_Tp>>
 ```
+
 ## 现成的 memory_resource
 
 上面提到的分离接口可以实现不同 allocator 之间的通用，但是具体要让内存分配快起来需要高效的 memory_resource 实现，C++17 提供了五种[^5]:
@@ -154,9 +156,10 @@ construct 和 destroy  通过 allocator_traits 实现：
 | `null_memory_resource()`       | 返回一个每次分配都会失败的内存资源的指针               |
 
 这三种比较重要：
-1. [std::pmr::monotonic\_buffer\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
-2. [std::pmr::synchronized\_pool\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/synchronized_pool_resource)
-3. [std::pmr::unsynchronized\_pool\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/unsynchronized_pool_resource)
+
+1. [std::pmr::monotonic_buffer_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
+2. [std::pmr::synchronized_pool_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/synchronized_pool_resource)
+3. [std::pmr::unsynchronized_pool_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/unsynchronized_pool_resource)
 
 在接口调用中提到了 upstream 的概念：如果当前 memory_resource 内存不足，则调用 upstream memory_resource 的 allocate 方法[^4]。
 其实是有一个默认的 memory_resource 的，就是默认的 `::operator new` 和 `::operator delete` 管理内存。
@@ -171,7 +174,7 @@ construct 和 destroy  通过 allocator_traits 实现：
 
 ## 用法
 
-[std::pmr::monotonic\_buffer\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
+[std::pmr::monotonic_buffer_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
 [Cpp17/markdown/src/ch29\.md at master · MeouSker77/Cpp17](https://github.com/MeouSker77/Cpp17/blob/master/markdown/src/ch29.md#2913-%E8%AF%A6%E8%A7%A3%E6%A0%87%E5%87%86%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90)
 
 # 总结
@@ -183,9 +186,9 @@ construct 和 destroy  通过 allocator_traits 实现：
 5. memory_resource 内部来实现分配策略，和分配的具体对象无关
 6. 提供了五种特别的 memory_resource 实现
 
-[^1]: [std::allocator\_traits \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/allocator_traits)
+[^1]: [std::allocator_traits \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/allocator_traits)
 [^2]: [游戏引擎开发新感觉！\(6\) c\+\+17 内存管理 \- 知乎](https://zhuanlan.zhihu.com/p/96089089)
-[^3]: [std::pmr::memory\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/memory_resource)
-[^4]: [std::pmr::monotonic\_buffer\_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
+[^3]: [std::pmr::memory_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/memory_resource)
+[^4]: [std::pmr::monotonic_buffer_resource \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/monotonic_buffer_resource)
 [^5]: [Cpp17/markdown/src/ch29\.md at master · MeouSker77/Cpp17](https://github.com/MeouSker77/Cpp17/blob/master/markdown/src/ch29.md#2913-%E8%AF%A6%E8%A7%A3%E6%A0%87%E5%87%86%E5%86%85%E5%AD%98%E8%B5%84%E6%BA%90)
-[^6]: [std::allocator\_traits \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/allocator_traits)
+[^6]: [std::allocator_traits \- cppreference\.com](https://en.cppreference.com/w/cpp/memory/allocator_traits)
