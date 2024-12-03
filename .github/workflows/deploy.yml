@@ -46,7 +46,18 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Build with Honkit
         run: npx honkit build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: _book # The folder the action should deploy.
+          path: ./_book
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
