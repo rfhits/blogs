@@ -1,0 +1,45 @@
+{
+  "root": ".",
+  "title": "rfhits 的博客",
+  "language": "zh-hans",
+  "plugins": [
+    "-sharing",
+    "sharing-plus",
+    "-lunr",
+    "-search",
+    "search-plus",
+    "anchor-navigation-ex",
+    "mathjax",
+    "expandable-chapters-small",
+    "custom-favicon",
+    "page-footer-ex"
+  ],
+  "pluginsConfig": {
+    "favicon": "./img/fav.ico",
+    "anchor-navigation-ex": {
+      "showLevel": false
+    },
+    "sharing": {
+      "douban": true,
+      "facebook": true,
+      "qq": true,
+      "qzone": true,
+      "twitter": true,
+      "weibo": true,
+      "all": [
+        "douban",
+        "facebook",
+        "qq",
+        "qzone",
+        "twitter",
+        "weibo"
+      ]
+    },
+    "page-footer-ex": {
+      "copyright": "rfhits@github",
+      "markdown": false,
+      "update_label": "<i>updated</i>",
+      "update_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  }
+}
