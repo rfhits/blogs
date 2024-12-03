@@ -1,12 +1,25 @@
-CAS 在 ARM 架构与 x86_64 架构上的实现
+# CAS 在 ARM 架构与 x86_64 架构上的实现
 
 -   created: 2024-11-13T16:25+08:00
 -   published: 2024-11-13T16:36+08:00
--   modified: 2024-12-01T01:22+08:00
+-   modified: 2024-12-02T10:44+08:00
 -   categories: operating-system
 -   tags: lock-free
 
 [toc]
+
+## 总结
+
+1. CAS 全称是 compare and swap，在 read-modify-write 中的 write 使用 cas
+2. x86-64 上，cas 对应的指令是 `cmpxchg [shared_var], src`，把 `$eax` 和 `[shared_var]` 比较
+    1. `cmpxchg`失败了会把 `[shared_var]` 写回到 `$eax` 里面
+    2. 如果多核的话，需要 `lock cmpxchg`
+3. 语言层面有 `compare_exchange(obj, expected, desired)`，也是失败了会回写 `expected`
+4. arm 等平台通过 `LL/SC` 实现 cas，weak 和 strong 的区别是检查 `ll/sc` 中间是否被打断过。
+   打断的原因可能是其他线程 ABA 了，也可能是 spurious failure
+5. 语言层面没有解决 ABA 问题，因为 load-modify-cas，中 load 和 cas 不是用 `LL/SC` 实现的
+   还是要用 version 或者其他方法
+6. 注意`LL/SC`防止 false sharing，要用内存对齐
 
 ## CAS
 
@@ -25,7 +38,7 @@ int add() {
 如果有多个线程都在执行 add，以下的汇编代码可能被交错执行，从而导致错误。
 注：用方括号`[x]`表示这个值在内存中，所有汇编格式为 `op destination source`
 
-```asm
+```assembly
 load $0 [x]
 $0 = $0 + 1
 store [x] $0
@@ -33,7 +46,7 @@ store [x] $0
 
 交错执行：
 
-```asm
+```assembly
 # thread A:
 load $0 [x]
 $0 = $0 + 1
@@ -52,7 +65,7 @@ store [x] $0
 
 每次把 update 写入 x 前，取出 x 中的值和 old 值比较一下，相等才可以写入。
 
-```asm
+```assembly
 # 模拟读取 [x] 并修改的操作
 load $old [x]
 $update = $old + 1
@@ -102,7 +115,7 @@ The `cmpxchg` instruction affects the zero flag (ZF):
 
 Here’s a simple example of how `cmpxchg` might be used:
 
-```asm
+```assembly
 mov eax, [shared_variable]   ; Load the current value of shared_variable into EAX
 mov ebx, new_value           ; Load the new value into EBX
 cmpxchg [shared_variable], ebx ; Compare and exchange
@@ -118,7 +131,7 @@ cmpxchg [shared_variable], ebx ; Compare and exchange
 
 假设 Thread A 和 Thread B 在单核上执行如下汇编：
 
-```asm
+```assembly
 load $0 [x]
 
 .begin:
@@ -143,7 +156,7 @@ Thread A 从上下文恢复 `$0` 和 `$1`，再执行 `cmpxchg [x] $1`，会发�
 还是一样的汇编代码，Thread A 在 CoreX 上，Thread B 在 CoreY 上，
 这次没有任何中断打断 Thread A 或者 Thread B。
 
-```asm
+```assembly
 load $0 [x]
 
 .begin:
@@ -166,7 +179,10 @@ C 提供了 `atomic_compare_exchange_weak(obj, expected, desired)` 和 `atomic_c
 
 ### 失败了会回写
 
-验证程序：[./test-cas-fail.c](./test-cas-fail.c)
+验证程序：
+
+1.  <a href="./test-fail-cas.c" target="_blank">test-fail-cas.c</a>
+2.  <a href="./test-fail-cas.cpp" target="_blank">test-fail-cas.cpp</a>
 
 ```c
 #include <stdatomic.h>
@@ -207,7 +223,7 @@ int add(int val)
 
 汇编结果见 https://godbolt.org/z/nvWW14ahW
 
-```asm
+```assembly
 add:
         mov     eax, DWORD PTR count[rip]
         add     edi, eax
@@ -232,7 +248,7 @@ count:
 
 为了解决 ABA 问题，`compare exchange` 被拆开
 
-```asm
+```assembly
 # 假设现在已知 [x] 旧值在 $old 中
 load $old, [x]
 
@@ -287,7 +303,7 @@ int add(void)
 
 开启 O1 进行编译：
 
-```asm
+```assembly
 # weak.asm
 add:
         movw    r3, #:lower16:.LANCHOR0
@@ -308,7 +324,7 @@ count:
         .space  4
 ```
 
-```asm
+```assembly
 # strong.asm
 add:
         movw    r3, #:lower16:.LANCHOR0
