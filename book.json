@@ -3,16 +3,20 @@
   "title": "rfhits 的博客",
   "language": "zh-hans",
   "plugins": [
+    "prism",
+    "-highlight",
     "-sharing",
     "sharing-plus",
     "-lunr",
     "-search",
     "search-plus",
+    "code",
     "anchor-navigation-ex",
     "mathjax",
     "expandable-chapters-small",
     "custom-favicon",
-    "page-footer-ex"
+    "page-footer-ex",
+    "edit-link"
   ],
   "pluginsConfig": {
     "favicon": "./img/fav.ico",
@@ -40,6 +44,10 @@
       "markdown": false,
       "update_label": "<i>updated</i>",
       "update_format": "YYYY-MM-DD HH:mm:ss"
+    },
+    "edit-link": {
+      "base": "https://github.com/rfhits/blogs/edit/main",
+      "label": "Edit This Page"
     }
   }
 }
