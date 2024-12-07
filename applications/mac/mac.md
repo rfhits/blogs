@@ -75,6 +75,7 @@ error: `manipulators` is missing or empty in ...
 
 -   截屏：[snipaste](https://www.snipaste.com/)
 -   homebrew: [Homebrew — The Missing Package Manager for macOS \(or Linux\)](https://brew.sh/)
+-   鼠标平滑：[Mos: 一个用于在 macOS 上平滑你的鼠标滚动效果或单独设置滚动方向的小工具, 让你的滚轮爽如触控板](https://github.com/Caldis/Mos)
 
 [^1]: https://github.com/microsoft/vscode/issues/182834#issuecomment-1822218334
 [^2]: [如何在 Mac 上使用 Shift 来切换中英文 – 栋哥的赛博空间](https://liuyandong.com/archives/9740)
