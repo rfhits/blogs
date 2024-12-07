@@ -2,7 +2,11 @@
 
 ## categories
 
-### c-cpp
+### languages
+
+#### c-cpp
+
+#### python
 
 ### compiler
 
