@@ -35,12 +35,12 @@ brew install shortcutdetective
 | caps_lock + a |         home         |                   |
 | caps_lock + ; |         end          |                   |
 
-对应规则见：[karabiner-rule-rule-capslock-vim.json](./karabiner-rule-capslock-vim.json)。
+对应规则见：<a href="./karabiner-rule-capslock-vim.json" target="_blank">karabiner-rule-rule-capslock-vim.json</a>
 
 这个 json 并不复杂，第一条 manipulator 设置了按下 capslock 后 `caps_lock pressed` 变量为 1，  
 后面就是从 from 映射到 to，mac 下这些 command、option、ctrl 统称为 `modifiers`
 
-#### Karaoke rule
+#### Karabiner rule
 
 Karabiner rule 编写，如果通过 UI `add rule`，那需要的是一个 `rule.json`，rule 这个 obj 的描述如下：
 
