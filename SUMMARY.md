@@ -1,17 +1,17 @@
 # SUMMARY
 
 -   [Home](./README.md)
--   [C/CPP](./SUMMARY.md)
+-   [C/CPP](./archives.md#c-cpp)
     -   [左值、右值、移动语义、完美转发](./c-cpp/cpp-lvalue-rvalue-move-forward.md)
--   [编译原理](./SUMMARY.md)
+-   [编译原理](./archives.md#compiler)
     -   [函数调用约定中寄存器的保存问题](./compiler/calling-convention/calling-convention.md)
--   [操作系统](./SUMMARY.md)
+-   [操作系统](./archives.md#operating-system)
     -   [CAS 在 ARM 架构与 x86_64 架构上的实现](/operating-system/cas-on-arm-and-x86-64/cas-on-arm-and-x86-64.md)
     -   [ELF 文件的链接与加载](./operating-system/elf-linker-loader/elf-linker-loader.md)
--   [应用](./SUMMARY.md)
-    -   [Git]
+-   [应用](./archives.md#applications)
+    -   [Git](./archives.md#git)
         -   [Git 常用命令](applications/git/git-cheatsheet.md)
         -   [git clone GitHub 仓库报错未授权](./applications/git/grant-github-authentication-to-git.md)
     -   [Mac 配置](./applications/mac/mac.md)
--   [大学生活](./SUMMARY.md)
+-   [大学生活](./archives.md#college-life)
     -   [北航数据库课程感想](./college-life/reflection-on-buaa-database-course/reflection-on-buaa-database-course.md)
