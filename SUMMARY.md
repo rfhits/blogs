@@ -1,6 +1,8 @@
 # SUMMARY
 
 -   [Home](./README.md)
+-   [C/CPP](./SUMMARY.md)
+    -   [左值、右值、移动语义、完美转发](./c-cpp/cpp-lvalue-rvalue-move-forward.md)
 -   [编译原理](./SUMMARY.md)
     -   [函数调用约定中寄存器的保存问题](./compiler/calling-convention/calling-convention.md)
 -   [操作系统](./SUMMARY.md)
