@@ -196,7 +196,7 @@ template 那一行表示的是，下面要用到的未知的类型参数。
 
 ### 利用类模板和函数模板实现编译器计算斐波那契数列
 
-见 [./template-fibo.cpp](./template-fibo.cpp)
+见 <a href="./template-fibo.cpp" target="_blank">./template-fibo.cpp</a>
 
 注意：类模板成员变量要用 `static const` 修饰
 
