@@ -2,6 +2,7 @@
 
 -   [Home](./README.md)
 -   [C/CPP](./archives.md#c-cpp)
+    -   [C++模板](./languages/c-cpp/cpp-template/cpp-template.md)
     -   [左值、右值、移动语义、完美转发](./languages/c-cpp/cpp-lvalue-rvalue-move-forward.md)
 -   [编译原理](./archives.md#compiler)
     -   [函数调用约定中寄存器的保存问题](./compiler/calling-convention/calling-convention.md)
