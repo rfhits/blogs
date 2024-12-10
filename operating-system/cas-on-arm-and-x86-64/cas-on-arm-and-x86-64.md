@@ -397,7 +397,7 @@ int add(void)
 虽然用 LL/SC 实现了 cas，但是因为在 load 到 old 时候，这条 load 指令并不是 LL，
 所以对于本线程的 load-modify-cas 操作，cas 没法判断在 modify 期间，其他线程是否修改了 `shared_var`。
 
-LL/SC 只是保证了 `compare_echange()` 函数内部没有 ABA problem。
+LL/SC 只是保证了 `compare_exchange()` 函数内部没有 ABA problem。
 
 ### 何时用 weak，何时用 strong？
 
@@ -407,7 +407,7 @@ weak 和 strong 区别就是，当 `obj==expected` 后，发现 cache line 被 w
 
 weak 说不用了，我直接失败，strong 会一直尝试，保证自己没有被打断。
 
-我觉得要具体情况具体分析，比如 suprious failure 的概率，不同线程写入的值相等的概率。
+我觉得要具体情况具体分析，比如 spurious failure 的概率，不同线程写入的值相等的概率。
 
 比如假设 spurious failure 概率非常小，多个线程对一个变量自增 1。在 LL 和 SC 中间如果 发现 cache line 被 written 了，那么就是其他线程已经更新了，不用再 retrieve 一遍，用 weak 更好。
 
