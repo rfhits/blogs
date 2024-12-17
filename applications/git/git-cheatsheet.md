@@ -1,16 +1,39 @@
-Git 常用命令
+# Git 常用命令
 
--   modified: 2024-01-04T11:32+08:00
+-   modified: 2024-12-17T12:42+08:00
 -   published: 2024-12-07T13:22+08:00
 -   categories: git
 
 [toc]
 
-# config
+## Git 数据模型
 
-`.git` 文件夹下有个 `config` 文件，里面记载了仓库的地址、用户名和邮箱等信息。如果不希望全局配置对当前仓库生效，可以直接编辑 `config` 文件。
+[版本控制\(Git\) · the missing semester of your cs education](https://missing-semester-cn.github.io/2020/version-control/)
 
-# 个人信息配置
+1. 提交记录构成有向无环图，后提交的记录依赖于前面的记录  
+   比如 merge 后的提交记录会有两个 parent
+2. 数据包括 tree，blob 和 commit，通过 sha1 得到哈希值存储
+
+## Git 配置
+
+`.git` 文件夹下有个 `config` 文件，里面记载了仓库的地址、用户名和邮箱等信息。  
+如果不希望全局配置对当前仓库生效，可以直接编辑 `config` 文件。
+
+关于查看配置的命令：
+
+```bash
+# 查看所有的配置
+git config --list
+
+# 查看某个配置，显示的全局的配置
+git config user.name
+git config user.email
+
+# 某个项目根目录下使用，显示的是 全局配置+当前项目的配置
+git config --list
+```
+
+### 配置邮箱和用户名
 
 Git 的 config 会作为 `git commit`时的相关信息，但不会作为验证信息，这一点是很多新手的误区。能不能推送上去，只和 ssh、https 验证是否通过有关，和 username 及 email 无关。
 
@@ -50,23 +73,9 @@ git config user.email "your all repo email"
 
 这个配置将会被写入到 `.git/config` 这个文件里。
 
-关于查看配置的命令：
-
-```bash
-# 查看所有的配置
-git config --list
-
-# 查看某个配置，显示的全局的配置
-git config user.name
-git config user.email
-
-# 某个项目根目录下使用，显示的是 全局配置+当前项目的配置
-git config --list
-```
-
 参考[Git 全局配置和单个仓库的用户名邮箱配置](https://blog.csdn.net/qq_29232943/article/details/103121667)
 
-# proxy
+### 配置代理
 
 查看配置
 
@@ -83,7 +92,7 @@ git config --global --get https.proxy
 git config --global http.proxy http://127.0.0.1:7890
 git config --global https.proxy http://127.0.0.1:7890
 
-# 如果本地代理服务器使用socks5协议，设置下面两条
+# 如果本地代理服务器使用socks5协议，设置下面两条，端口号也是 clash 默认的
 git config --global http.proxy socks5://127.0.0.1:7890
 git config --global https.proxy socks5://127.0.0.1:7890
 ```
@@ -97,7 +106,7 @@ git config --global --unset https.proxy
 
 参考：[config a proxy to work with git](https://www.delftstack.com/howto/git/git-setup-proxy/)
 
-# gitignore
+## gitignore
 
 常常会把不想添加的文件被 checked，所以有如下命令，清空 git 的 check
 
@@ -107,9 +116,17 @@ git add .
 git commit -m 'update .gitignore'
 ```
 
-# commit
+## commit
 
-## commit message
+### empty commit
+
+记录一下 empty commit 的命令
+
+```bash
+git commit --allow-empty -m "commit message"
+```
+
+### 规范填写 commit message
 
 [Git 如何规范填写 Commit Message_CSDN](https://blog.csdn.net/asc_123456/article/details/118070026)
 
@@ -135,17 +152,11 @@ type 填对最重要，如 fix, feat, test, refactor, perf, style, docs
 | docs     | Development | 文档类更新                                                                           |
 | chore    | Development | 其他类型，比如构建流程、依赖管理或者辅助工具的变动                                   |
 
-## empty commit
-
-记录一下 empty commit 的命令
-
-```bash
-git commit --allow-empty -m "commit message"
-```
-
-## 合并多个 commit
+### 合并多个 commit
 
 参考[git 合并多个 commit-睿站](https://www.bilibili.com/video/BV15h411f74h)
+
+rebase 的意思是，以指定 commit 为 base
 
 ```bash
 git log --oneline # 查看最近的git log
@@ -154,9 +165,9 @@ git rebase -i <要合并的commit前一个的hash>
 # 重新填写 commit 信息
 ```
 
-# 协同开发
+## 分支和协同开发
 
-## 本地创建切换分支
+### 本地创建切换分支
 
 ```bash
 git checkout -b dev
@@ -164,13 +175,13 @@ git checkout -b dev
 
 现在位于 dev 分支下
 
-## 推送到远程分支
+### 推送到远程分支
 
 ```bash
 git push -u origin dev
 ```
 
-## 本地合并 dev 分支
+### 本地合并 dev 分支
 
 先到把 dev 合并的分支，比如 main
 
@@ -184,7 +195,7 @@ git checkout main
 git merge dev
 ```
 
-## 删除本地和远程的 dev 分支
+### 删除本地和远程的 dev 分支
 
 先删除本地分支
 
@@ -200,13 +211,21 @@ git push origin --delete dev
 
 参考[Git 合并分支](https://www.jianshu.com/p/26d050497abb)
 
-# github 加速
+## github 加速
 
 参考[fastgit 使用指南](https://doc.fastgit.org/zh-cn/guide.html)
 
-# Git 数据模型
+## 其他
 
-[版本控制\(Git\) · the missing semester of your cs education](https://missing-semester-cn.github.io/2020/version-control/)
+### 只需要最新的文件，不需要记录：`--depth 1`
 
-1. 提交记录构成有向无环图，比如 merge 后的提交记录会有两个 parent
-2. 数据包括 tree，blob 和 commit，通过 sha1 得到哈希值存储
+```shell
+git clone --depth 1 <repo>
+```
+
+比如要编译一个 C++ 库，只需要它对应仓库的文件就好了，不需要它的提交记录。  
+像 Google 的 grpc 这个库，安装教程中就使用了这个命令。
+
+```shell
+git clone --recurse-submodules -b v1.66.0 --depth 1 --shallow-submodules https://github.com/grpc/grpc
+```
