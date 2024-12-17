@@ -19,21 +19,21 @@ brew install shortcutdetective
 其他修改：
 
 1. 设置里，查找 `键盘快捷键`，把 fn 改到 ctrl, 因为 fn 在键盘的左下角，这个位置给 ctrl 留着比较方便。
-2. 安装搜狗输入法使用 shift 切换中英文。
+2. 安装搜狗输入法使用 shift 切换中英文，在搜狗输入法的「高级」中导入系统短语。
 
 ### 使用 Karabiner 映射到 vim 方向键
 
-|   shortcut    |        target        |       备注        |
-| :-----------: | :------------------: | :---------------: |
-|   caps_lock   |        escape        |                   |
-| caps_lock + j |      down_arrow      |                   |
-| caps_lock+ k  |       up_arrow       |                   |
-| caps_lock + h |      left_arrow      |                   |
-|  caps_lock+l  |     right_arrow      |                   |
-| caps_lock + w | option + right_arrow | 向后移动一个 word |
-| caps_lock + b | option + right_arrow | 向前移动一个 word |
-| caps_lock + a |         home         |                   |
-| caps_lock + ; |         end          |                   |
+|   shortcut    |        target        |           备注            |
+| :-----------: | :------------------: | :-----------------------: |
+|   caps_lock   |        escape        |                           |
+| caps_lock + j |      down_arrow      |                           |
+| caps_lock+ k  |       up_arrow       |                           |
+| caps_lock + h |      left_arrow      |                           |
+|  caps_lock+l  |     right_arrow      |                           |
+| caps_lock + w | option + right_arrow |     向后移动一个 word     |
+| caps_lock + b | option + right_arrow |     向前移动一个 word     |
+| caps_lock + a |   cmd + left_arrow   | 跳转到行首，不要改到 home |
+| caps_lock + ; |  cmd + right_arrow   | 跳转到行末，不要改到 end  |
 
 对应规则见：<a href="./karabiner-rule-capslock-vim.json" target="_blank">karabiner-rule-rule-capslock-vim.json</a>
 
@@ -75,7 +75,8 @@ error: `manipulators` is missing or empty in ...
 
 -   截屏：[snipaste](https://www.snipaste.com/)
 -   homebrew: [Homebrew — The Missing Package Manager for macOS \(or Linux\)](https://brew.sh/)
--   鼠标平滑：[Mos: 一个用于在 macOS 上平滑你的鼠标滚动效果或单独设置滚动方向的小工具, 让你的滚轮爽如触控板](https://github.com/Caldis/Mos)
+-   鼠标平滑：[Mos](https://github.com/Caldis/Mos)
+-   剪贴板历史：[Maccy: Lightweight clipboard manager for macOS](https://github.com/p0deje/Maccy)
 
 [^1]: https://github.com/microsoft/vscode/issues/182834#issuecomment-1822218334
 [^2]: [如何在 Mac 上使用 Shift 来切换中英文 – 栋哥的赛博空间](https://liuyandong.com/archives/9740)
