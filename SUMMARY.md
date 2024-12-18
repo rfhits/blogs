@@ -4,6 +4,7 @@
 -   [C/CPP](./archives.md#c-cpp)
     -   [C++模板](./languages/c-cpp/cpp-template/cpp-template.md)
     -   [左值、右值、移动语义、完美转发](./languages/c-cpp/cpp-lvalue-rvalue-move-forward.md)
+    -   [lambda 表达式与「函数对象」（functor）](./languages/c-cpp/cpp-lambda-functor/cpp-lambda-functor.md)
 -   [Python](./archives.md#python)
     -   [在 Python 中使用 Type Hints](./languages/python/python-type-hints.md)
 -   [其他语言]
