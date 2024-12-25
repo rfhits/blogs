@@ -1,0 +1,1 @@
+void echo(const char*);
