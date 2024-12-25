@@ -2,8 +2,11 @@
 
 -   created: 2024-12-06T17:25+08:00
 -   published: 2024-12-07T10:47+08:00
+-   modified: 2024-12-24T14:33+08:00
 -   categories: applications
 -   tags: mac
+
+[toc]
 
 ## 键位修改
 
@@ -77,6 +80,13 @@ error: `manipulators` is missing or empty in ...
 -   homebrew: [Homebrew — The Missing Package Manager for macOS \(or Linux\)](https://brew.sh/)
 -   鼠标平滑：[Mos](https://github.com/Caldis/Mos)
 -   剪贴板历史：[Maccy: Lightweight clipboard manager for macOS](https://github.com/p0deje/Maccy)
+-   CPU、网速、磁盘监控：[Stats](https://github.com/exelban/stats)
+
+## 技巧
+
+按住 command 就可以用鼠标拖动菜单栏（Menu Bar）上的小图标，可以重新排成自己喜欢的顺序。拖动到菜单栏外则是移除。
+
+## 参考
 
 [^1]: https://github.com/microsoft/vscode/issues/182834#issuecomment-1822218334
 [^2]: [如何在 Mac 上使用 Shift 来切换中英文 – 栋哥的赛博空间](https://liuyandong.com/archives/9740)
