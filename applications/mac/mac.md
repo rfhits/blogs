@@ -26,17 +26,17 @@ brew install shortcutdetective
 
 ### 使用 Karabiner 映射到 vim 方向键
 
-|   shortcut    |        target        |           备注            |
-| :-----------: | :------------------: | :-----------------------: |
-|   caps_lock   |        escape        |                           |
-| caps_lock + j |      down_arrow      |                           |
-| caps_lock+ k  |       up_arrow       |                           |
-| caps_lock + h |      left_arrow      |                           |
-|  caps_lock+l  |     right_arrow      |                           |
-| caps_lock + w | option + right_arrow |     向后移动一个 word     |
-| caps_lock + b | option + right_arrow |     向前移动一个 word     |
-| caps_lock + a |   cmd + left_arrow   | 跳转到行首，不要改到 home |
-| caps_lock + ; |  cmd + right_arrow   | 跳转到行末，不要改到 end  |
+|     shortcut      |          target          |       备注        |
+| :---------------: | :----------------------: | :---------------: |
+|    `caps_lock`    |         `escape`         |                   |
+| `caps_lock` + `j` |       `down_arrow`       |                   |
+| `caps_lock` + `k` |        `up_arrow`        |                   |
+| `caps_lock` + `h` |       `left_arrow`       |                   |
+| `caps_lock` + `l` |      `right_arrow`       |                   |
+| `caps_lock` + `w` | `option` + `right_arrow` | 向后移动一个 word |
+| `caps_lock` + `b` | `option` + `right_arrow` | 向前移动一个 word |
+| `caps_lock` + `a` |   `cmd` + `left_arrow`   |    跳转到行首     |
+| `caps_lock` + `;` |  `cmd` + `right_arrow`   |    跳转到行末     |
 
 对应规则见：<a href="./karabiner-rule-capslock-vim.json" target="_blank">karabiner-rule-rule-capslock-vim.json</a>
 
