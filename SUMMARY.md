@@ -14,6 +14,8 @@
 -   [操作系统](./archives.md#operating-system)
     -   [CAS 在 ARM 架构与 x86_64 架构上的实现](/operating-system/cas-on-arm-and-x86-64/cas-on-arm-and-x86-64.md)
     -   [ELF 文件的链接与加载](./operating-system/elf-linker-loader/elf-linker-loader.md)
+-   [前端](./archives.md#frontend)
+    -   [后端无法解析 axios 发送的请求](./frontend/cant-parse-axios-posts.md)
 -   [应用](./archives.md#applications)
     -   [Git](./archives.md#git)
         -   [Git 常用命令](applications/git/git-cheatsheet.md)
