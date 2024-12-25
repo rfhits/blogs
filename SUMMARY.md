@@ -23,6 +23,7 @@
     -   [Git](./archives.md#git)
         -   [Git 常用命令](applications/git/git-cheatsheet.md)
         -   [git clone GitHub 仓库报错未授权](./applications/git/grant-github-authentication-to-git.md)
+    -   [Protocol Buffers 使用笔记](./applications/protobuf/protobuf.md)
     -   [Mac 配置](./applications/mac/mac.md)
 -   [大学生活](./archives.md#college-life)
     -   [北航数据库课程感想](./college-life/reflection-on-buaa-database-course/reflection-on-buaa-database-course.md)
