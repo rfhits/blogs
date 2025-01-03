@@ -2,7 +2,7 @@
 
 -   created: 2024-12-06T17:25+08:00
 -   published: 2024-12-07T10:47+08:00
--   modified: 2024-12-24T14:33+08:00
+-   modified: 2025-01-03T15:38+08:00
 -   categories: applications
 -   tags: mac
 
@@ -81,6 +81,8 @@ error: `manipulators` is missing or empty in ...
 -   鼠标平滑：[Mos](https://github.com/Caldis/Mos)
 -   剪贴板历史：[Maccy: Lightweight clipboard manager for macOS](https://github.com/p0deje/Maccy)
 -   CPU、网速、磁盘监控：[Stats](https://github.com/exelban/stats)
+-   安卓设备投屏: [Scrcpy: screen copy](https://github.com/Genymobile/scrcpy)  
+    以及第三方 GUI [ScrcpyHub](https://github.com/kaleidot725/ScrcpyHub)
 
 ## 技巧
 
