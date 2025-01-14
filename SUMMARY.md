@@ -18,6 +18,8 @@
     -   [ELF 文件的链接与加载](./operating-system/elf-linker-loader/elf-linker-loader.md)
 -   [Linux](./archives.md#linux)
     -   [脚本中切换目录命令不生效](./linux/cd-does-not-take-effect-in-script.md)
+-   [计算机安全](./archives.md#security)
+    -   [HMAC](./security/hmac.md)
 -   [前端](./archives.md#frontend)
     -   [后端无法解析 axios 发送的请求](./frontend/cant-parse-axios-post.md)
 -   [应用](./archives.md#applications)
