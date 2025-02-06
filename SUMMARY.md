@@ -12,6 +12,8 @@
     -   [conda 常用命令](./languages/python/conda-commands.md)
     -   [jieba 无法提取单个字符](./languages/python/jieba-cant-extract-single-character.md)
 -   [其他语言](./archives.md#languages)
+    -   [java](./categories.md#java)
+        -   [maven quickstart](./languages/java/maven-quickstart.md)
 -   [编译原理](./archives.md#compiler)
     -   [函数调用约定中寄存器的保存问题](./compiler/calling-convention/calling-convention.md)
     -   [语法分析作业解析](./compiler/homework-of-grammar-analysis.md)
