@@ -9,6 +9,8 @@
 -   [Python](./archives.md#python)
     -   [在 Python 中使用 Type Hints](./languages/python/python-type-hints.md)
     -   [Python async await](./languages/python/python-async-await/python-async-await.md)
+    -   [conda 常用命令](./languages/python/conda-commands.md)
+    -   [jieba 无法提取单个字符](./languages/python/jieba-cant-extract-single-character.md)
 -   [其他语言](./archives.md#languages)
 -   [编译原理](./archives.md#compiler)
     -   [函数调用约定中寄存器的保存问题](./compiler/calling-convention/calling-convention.md)
