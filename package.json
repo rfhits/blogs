@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@honkit/honkit-plugin-highlight": "^6.0.2",
     "gitbook-plugin-anchor-navigation-ex": "^1.0.14",
     "gitbook-plugin-code": "^0.1.0",
     "gitbook-plugin-custom-favicon": "^0.0.4",
@@ -8,7 +9,6 @@
     "gitbook-plugin-mathjax": "^0.0.3",
     "gitbook-plugin-page-footer-ex": "^0.1.2",
     "gitbook-plugin-page-treeview-simple": "^4.0.2",
-    "gitbook-plugin-prism": "^2.0.0",
     "gitbook-plugin-search-plus": "^1.0.4-alpha-3",
     "gitbook-plugin-sharing-plus": "^0.0.2",
     "honkit": "^4.0.0"

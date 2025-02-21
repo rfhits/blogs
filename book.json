@@ -3,8 +3,6 @@
   "title": "rfhits 的博客",
   "language": "zh-hans",
   "plugins": [
-    "prism",
-    "-highlight",
     "-sharing",
     "sharing-plus",
     "-lunr",
