@@ -28,6 +28,7 @@
 -   [前端](./archives.md#frontend)
     -   [后端无法解析 axios 发送的请求](./frontend/cant-parse-axios-post.md)
 -   [应用](./archives.md#applications)
+    -   [tmux](./applications/tmux.md)
     -   [gdb](./applications/gdb.md)
     -   [Git](./archives.md#git)
         -   [Git 常用命令](applications/git/git-cheatsheet.md)
