@@ -2,7 +2,7 @@
 
 -   created: 2024-12-06T17:25+08:00
 -   published: 2024-12-07T10:47+08:00
--   modified: 2025-01-03T15:38+08:00
+-   modified: 2025-03-19T10:16+08:00
 -   categories: applications
 -   tags: mac
 
@@ -19,6 +19,7 @@
     以及第三方 GUI [ScrcpyHub](https://github.com/kaleidot725/ScrcpyHub)
 -   配置键盘、触控板、鼠标快捷方式：[BetterAndBetter](https://github.com/songhao/BetterAndBetter/)
 -   显示被刘海遮住的菜单栏图标：[ice menubar](https://github.com/jordanbaird/Ice/releases)
+-   允许不同分辨率拥有 HiDPI: [BetterDisplay](https://github.com/waydabber/BetterDisplay)
 
 ## 键位修改
 
