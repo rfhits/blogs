@@ -34,14 +34,15 @@ brew install shortcutdetective
 
 其他修改：
 
-1. 设置里，查找 `键盘快捷键`，把 fn 改到 ctrl, 因为 fn 在键盘的左下角，这个位置给 ctrl 留着比较方便。
-2. 安装搜狗输入法使用 shift 切换中英文，在搜狗输入法的「高级」中导入系统短语。
+1. 安装搜狗输入法使用 shift 切换中英文，在搜狗输入法的「高级」中导入系统短语。
+2. 设置里面 「键盘」>「键盘快捷键」>「修饰键」，
+    1. capslock 改成 escape
+    2. fn 改到 ctrl, 因为 fn 在键盘的左下角，这个位置给 ctrl 留着比较方便。
 
 ### 使用 Karabiner 映射到 vim 方向键
 
 |     shortcut      |          target          |       备注        |
 | :---------------: | :----------------------: | :---------------: |
-|    `caps_lock`    |         `escape`         |                   |
 | `caps_lock` + `j` |       `down_arrow`       |                   |
 | `caps_lock` + `k` |        `up_arrow`        |                   |
 | `caps_lock` + `h` |       `left_arrow`       |                   |
